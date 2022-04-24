@@ -4,6 +4,7 @@ using UnityEngine.Tilemaps;
 /// <summary>
 /// Class for holding game specific info about a tile base painted by tile palette
 /// </summary>
+[CreateAssetMenu(menuName = "Scriptable Objects/Game Tile Type")]
 public class GameTileType : ScriptableObject
 {
     public TileBase tileBase;

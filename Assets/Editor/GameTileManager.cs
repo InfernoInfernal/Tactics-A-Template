@@ -12,14 +12,19 @@ public class GameTileManager : ScriptableWizard
     static readonly string TilemapTag = "Tilemap"; //Tilemap Tag
     static readonly string GameTileTag = "GameTile"; //Game Tile Tag
 
-    //Tilemap to generate/degeenrate files inside, you can drag this in instead of using Tilemap tag
-    static public Tilemap TilemapComponent;
+    //Tilemap to generate/degenerate files inside, you can drag this in instead of using Tilemap tag
+    public Tilemap TilemapComponent;
     //Visible list of Game Tile Type Scriptable Objects loaded by the wizard
-    static public List<GameTileType> GameTileTypes = new List<GameTileType>();
+    public List<GameTileType> GameTileTypes = new List<GameTileType>();
 
     //Wizard Constructor
     [MenuItem ("Tools/Game Tile Manager")]
     static void GameTileManagerWizard()
+    {
+        DisplayWizard<GameTileManager>("Game Tile Manager", "Destroy Game Tiles", "Regenerate Game Tiles");
+    }
+
+    private void Awake()
     {
         //Find Tilemap (assumes only one tilemap instance)
         var tilemapCheck = GameObject.FindGameObjectWithTag(TilemapTag);
@@ -37,24 +42,21 @@ public class GameTileManager : ScriptableWizard
             string path = AssetDatabase.GUIDToAssetPath(gameTileTypeGUIDs[i]);
             GameTileTypes.Add(AssetDatabase.LoadAssetAtPath<GameTileType>(path));
         }
-
-        //Finally, display the wizard to the user
-        DisplayWizard<GameTileManager>("Game Tile Manager", "Regenerate Game Tiles", "Destroy Game Tiles");
     }
 
     /// <summary>
-    /// Regenerate Game Tiles
+    /// Regenerate Game Tiles Button
     /// </summary>
-    void OnWizardCreate()
+    void OnWizardOtherButton()
     {
         DestroyGameTiles();
         CreateGameTiles();
     }
 
     /// <summary>
-    /// Destroy Game Tiles
+    /// Destroy Game Tiles Button
     /// </summary>
-    void OnWizardOtherButton()
+    void OnWizardCreate()
     {
         DestroyGameTiles();
     }
