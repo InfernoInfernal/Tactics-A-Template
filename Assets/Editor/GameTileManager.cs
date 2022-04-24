@@ -11,19 +11,25 @@ public class GameTileManager : ScriptableWizard
 {
     static readonly string TilemapTag = "Tilemap"; //Tilemap Tag
     static readonly string GameTileTag = "GameTile"; //Game Tile Tag
+    static readonly int pixelHeight = 8; //The number of pixels in one game height unit of Y on a sprite
 
-    //Tilemap to generate/degenerate files inside, you can drag this in instead of using Tilemap tag
+    //Tilemap to generate/degenerate files inside (you could potentially drag this in instead of using Tilemap tag)
     public Tilemap TilemapComponent;
-    //Visible list of Game Tile Type Scriptable Objects loaded by the wizard
+    //Visible list of Game Tile Type scriptable objects loaded by the wizard
     public List<GameTileType> GameTileTypes = new List<GameTileType>();
 
-    //Wizard Constructor
+    /// <summary>
+    /// Wizard Constructor
+    /// </summary>
     [MenuItem ("Tools/Game Tile Manager")]
     static void GameTileManagerWizard()
     {
         DisplayWizard<GameTileManager>("Game Tile Manager", "Destroy Game Tiles", "Regenerate Game Tiles");
     }
 
+    /// <summary>
+    /// Awake function will find and load the tilemap and gametiletypes in assets
+    /// </summary>
     private void Awake()
     {
         //Find Tilemap (assumes only one tilemap instance)
@@ -106,7 +112,7 @@ public class GameTileManager : ScriptableWizard
                         continue;
 
                     //Create the GameTile GameObject Instance
-                    GameObject newGameTileObject = new GameObject($"GameTile X:{xStart} Y:{yStart} Z:{zStart}");
+                    GameObject newGameTileObject = new GameObject($"GameTile Node X:{xStart} Y:{yStart} Z:{zStart}");
                     GameTile gameTileComponent = newGameTileObject.AddComponent<GameTile>();
                     newGameTileObject.tag = GameTileTag;
                     if (gameTileMappingDictionary.ContainsKey(tileBase))
@@ -116,6 +122,23 @@ public class GameTileManager : ScriptableWizard
                         //The tileBase MUST have a corresponding GameTileType, or it won't have a source to pull data from
                         Debug.LogError($"No corresponding GameTileType found for TileBase at GameTile X:{xStart} Y:{yStart} Z:{zStart}");
                         return;
+                    }
+
+                    //Calculate XYZ world position and set the game object there, then parent it to the tilemap
+                    //TODO: Fix the height offset of 0.5ish?
+                    Vector3 worldPosition = TilemapComponent.CellToWorld(new Vector3Int(x, y, z));
+                    newGameTileObject.transform.position = new Vector3(
+                        worldPosition.x, worldPosition.y, gameTileComponent.TileSpriteHeight);
+                    newGameTileObject.transform.parent = TilemapComponent.transform;
+
+                    //Add a collider using the base tile's sprite
+                    PolygonCollider2D collider = newGameTileObject.AddComponent<PolygonCollider2D>();
+                    collider.pathCount = TilemapComponent.GetSprite(new Vector3Int(x, y, z)).GetPhysicsShapeCount();
+                    List<Vector2> points = new List<Vector2>();
+                    for (int i = 0; i < collider.pathCount; i++)
+                    {
+                        TilemapComponent.GetSprite(new Vector3Int(x, y, z)).GetPhysicsShape(i, points);
+                        collider.SetPath(i, points);
                     }
                 }
             }
