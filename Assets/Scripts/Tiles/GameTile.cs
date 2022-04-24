@@ -1,8 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+/// <summary>
+/// Component class for holding game specific info about a game tile object
+/// (Data is derived from a Game Tile Type scriptable object)
+/// </summary>
 public class GameTile : MonoBehaviour
 {
     public GameTileType GameTileType; //Type contains the tile information
