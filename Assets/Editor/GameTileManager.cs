@@ -11,7 +11,6 @@ public class GameTileManager : ScriptableWizard
 {
     static readonly string TilemapTag = "Tilemap"; //Tilemap Tag
     static readonly string GameTileTag = "GameTile"; //Game Tile Tag
-    static readonly int pixelHeight = 8; //The number of pixels in one game height unit of Y on a sprite
 
     //Tilemap to generate/degenerate files inside (you could potentially drag this in instead of using Tilemap tag)
     public Tilemap TilemapComponent;
@@ -88,6 +87,13 @@ public class GameTileManager : ScriptableWizard
             }
         }
 
+        //The Orientation mode needs to be Custom to work properly
+        if (TilemapComponent.orientation != Tilemap.Orientation.Custom)
+        {
+            Debug.LogError("The Tilemap Component's Orientation needs to be set to Custom, XY Offset is not fun to calculate :(");
+            return;
+        }
+
         //Compress bounds and prepare XYZ counters for only ranges that contain tiles
         TilemapComponent.CompressBounds();
         int xStart = TilemapComponent.cellBounds.position.x;
@@ -112,7 +118,7 @@ public class GameTileManager : ScriptableWizard
                         continue;
 
                     //Create the GameTile GameObject Instance
-                    GameObject newGameTileObject = new GameObject($"GameTile Node X:{xStart} Y:{yStart} Z:{zStart}");
+                    GameObject newGameTileObject = new GameObject($"GameTile Node X:{x} Y:{y} Z:{z}");
                     GameTile gameTileComponent = newGameTileObject.AddComponent<GameTile>();
                     newGameTileObject.tag = GameTileTag;
                     if (gameTileMappingDictionary.ContainsKey(tileBase))
@@ -120,15 +126,17 @@ public class GameTileManager : ScriptableWizard
                     else
                     {
                         //The tileBase MUST have a corresponding GameTileType, or it won't have a source to pull data from
-                        Debug.LogError($"No corresponding GameTileType found for TileBase at GameTile X:{xStart} Y:{yStart} Z:{zStart}");
+                        Debug.LogError($"No corresponding GameTileType found for TileBase at GameTile X:{x} Y:{y} Z:{z}");
                         return;
                     }
 
                     //Calculate XYZ world position and set the game object there, then parent it to the tilemap
-                    //TODO: Fix the height offset of 0.5ish?
                     Vector3 worldPosition = TilemapComponent.CellToWorld(new Vector3Int(x, y, z));
+                    //Note that the position must be offset by the Tile Anchor Offset of the Tilemap
                     newGameTileObject.transform.position = new Vector3(
-                        worldPosition.x, worldPosition.y, gameTileComponent.TileSpriteHeight);
+                        worldPosition.x + TilemapComponent.orientationMatrix[0,3]/*TileAnchor Offset X*/, 
+                        worldPosition.y + TilemapComponent.orientationMatrix[1,3]/*TileAnchor Offset Y*/,
+                        gameTileComponent.TileSpriteHeight);
                     newGameTileObject.transform.parent = TilemapComponent.transform;
 
                     //Add a collider using the base tile's sprite
@@ -140,6 +148,9 @@ public class GameTileManager : ScriptableWizard
                         TilemapComponent.GetSprite(new Vector3Int(x, y, z)).GetPhysicsShape(i, points);
                         collider.SetPath(i, points);
                     }
+
+                    //Break after the highest tile is found and an object created, we don't need anything for lower tiles
+                    break;
                 }
             }
         }
