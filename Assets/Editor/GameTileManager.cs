@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -90,7 +89,8 @@ public class GameTileManager : ScriptableWizard
         //The Orientation mode needs to be Custom to work properly
         if (TilemapComponent.orientation != Tilemap.Orientation.Custom)
         {
-            Debug.LogError("The Tilemap Component's Orientation needs to be set to Custom, XY Offset is not fun to calculate :(");
+            Debug.LogError("The Tilemap Component's Orientation needs to be set to Custom and use Offset, " +
+                "as standard Tile Anchor orientation doesn't work with CellToWorld calculations");
             return;
         }
 
