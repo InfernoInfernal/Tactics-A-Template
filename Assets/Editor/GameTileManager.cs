@@ -136,7 +136,7 @@ public class GameTileManager : ScriptableWizard
                     newGameTileObject.transform.position = new Vector3(
                         worldPosition.x + TilemapComponent.orientationMatrix[0,3]/*TileAnchor Offset X*/, 
                         worldPosition.y + TilemapComponent.orientationMatrix[1,3]/*TileAnchor Offset Y*/,
-                        gameTileComponent.TileSpriteHeight);
+                        z);
                     newGameTileObject.transform.parent = TilemapComponent.transform;
 
                     //Add a collider using the base tile's sprite
