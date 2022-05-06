@@ -117,25 +117,26 @@ public class GameTileManager : ScriptableWizard
                     if (tileBase == null)
                         continue;
 
+                    //The tileBase MUST have a corresponding GameTileType, or it won't have a source to pull data from
+                    if (!gameTileMappingDictionary.ContainsKey(tileBase))
+                    {
+                        Debug.LogError($"No corresponding GameTileType found for TileBase at GameTile X:{x} Y:{y} Z:{z}");
+                        DestroyGameTiles(); //Clear out the GameTiles created thus far
+                        return;
+                    }
+
                     //Create the GameTile GameObject Instance
                     GameObject newGameTileObject = new GameObject($"GameTile Node X:{x} Y:{y} Z:{z}");
                     GameTile gameTileComponent = newGameTileObject.AddComponent<GameTile>();
+                    gameTileComponent.GameTileType = gameTileMappingDictionary[tileBase];
                     newGameTileObject.tag = GameTileTag;
-                    if (gameTileMappingDictionary.ContainsKey(tileBase))
-                        gameTileComponent.GameTileType = gameTileMappingDictionary[tileBase];
-                    else
-                    {
-                        //The tileBase MUST have a corresponding GameTileType, or it won't have a source to pull data from
-                        Debug.LogError($"No corresponding GameTileType found for TileBase at GameTile X:{x} Y:{y} Z:{z}");
-                        return;
-                    }
 
                     //Calculate XYZ world position and set the game object there, then parent it to the tilemap
                     Vector3 worldPosition = TilemapComponent.CellToWorld(new Vector3Int(x, y, z));
                     //Note that the position must be offset by the Tile Anchor Offset of the Tilemap
                     newGameTileObject.transform.position = new Vector3(
                         worldPosition.x + TilemapComponent.orientationMatrix[0,3]/*TileAnchor Offset X*/, 
-                        worldPosition.y + TilemapComponent.orientationMatrix[1,3]/*TileAnchor Offset Y*/,
+                        worldPosition.y + TilemapComponent.orientationMatrix[1,3]/*TileAnchor Offset Y*/, 
                         z);
                     newGameTileObject.transform.parent = TilemapComponent.transform;
 
