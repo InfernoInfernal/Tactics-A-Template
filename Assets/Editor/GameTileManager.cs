@@ -140,6 +140,24 @@ public class GameTileManager : ScriptableWizard
                         z);
                     newGameTileObject.transform.parent = TilemapComponent.transform;
 
+                    //Set Surface Orientation for GameTile, If rotation >= 180 it means inclined the other direction
+                    if (gameTileComponent.GameTileType.SurfaceOrientation == TileSurfaceOrientation.Flat)
+                        gameTileComponent.SurfaceOrientation = TileSurfaceOrientation.Flat;
+                    else if (gameTileComponent.GameTileType.SurfaceOrientation == TileSurfaceOrientation.InclinedDownToLeft)
+                    {
+                        if (TilemapComponent.GetTransformMatrix(new Vector3Int(x, y, z)).rotation.eulerAngles.y < 180)
+                            gameTileComponent.SurfaceOrientation = TileSurfaceOrientation.InclinedDownToLeft;
+                        else
+                            gameTileComponent.SurfaceOrientation = TileSurfaceOrientation.InclinedDownToRight;
+                    }
+                    else if (gameTileComponent.GameTileType.SurfaceOrientation == TileSurfaceOrientation.InclinedDownToRight)
+                    {
+                        if (TilemapComponent.GetTransformMatrix(new Vector3Int(x, y, z)).rotation.eulerAngles.y < 180)
+                            gameTileComponent.SurfaceOrientation = TileSurfaceOrientation.InclinedDownToRight;
+                        else
+                            gameTileComponent.SurfaceOrientation = TileSurfaceOrientation.InclinedDownToLeft;
+                    }
+
                     //Add a collider using the base tile's sprite
                     PolygonCollider2D collider = newGameTileObject.AddComponent<PolygonCollider2D>();
                     collider.pathCount = TilemapComponent.GetSprite(new Vector3Int(x, y, z)).GetPhysicsShapeCount();
@@ -147,6 +165,16 @@ public class GameTileManager : ScriptableWizard
                     for (int i = 0; i < collider.pathCount; i++)
                     {
                         TilemapComponent.GetSprite(new Vector3Int(x, y, z)).GetPhysicsShape(i, points);
+
+                        //If we have a rotated tile, we need to flip the X coordinates
+                        if (TilemapComponent.GetTransformMatrix(new Vector3Int(x, y, z)).rotation.eulerAngles.y >= 180)
+                        {
+                            for (int j = 0; j < points.Count; j++)
+                            {
+                                points[j] = new Vector2(points[j].x * -1, points[j].y);
+                            }
+                        }
+
                         collider.SetPath(i, points);
                     }
 

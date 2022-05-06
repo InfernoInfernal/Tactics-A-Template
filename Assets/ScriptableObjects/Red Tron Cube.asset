@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Red Tron Cube
   m_EditorClassIdentifier: 
   tileBase: {fileID: 11400000, guid: 979d85b341d31d54b943f8b06b0473f1, type: 2}
-  tileSpriteHeight: 2
-  movementCost: 1
-  inaccessible: 0
-  liquid: 0
+  TileSpriteHeight: 2
+  MovementCost: 1
+  SlantOrientation: 0
+  Inaccessible: 0
+  Liquid: 0

@@ -12,8 +12,10 @@ public class GameTile : MonoBehaviour
     [HideInInspector]
     public TileBase TileBase { get { return GameTileType.tileBase; } }
 
-    public int TileSpriteHeight { get { return GameTileType.tileSpriteHeight; } }
-    public int MovementCost { get { return GameTileType.movementCost; } }
-    public bool Inaccessible { get { return GameTileType.inaccessible; } }
-    public bool Liquid { get { return GameTileType.liquid; } }
+    public float TileSpriteHeight { get { return GameTileType.TileSpriteHeight; } }
+    public int MovementCost { get { return GameTileType.MovementCost; } }
+    public TileSurfaceOrientation SurfaceOrientation;
+    public TileInclineRise InclineRise { get { return GameTileType.InclineRise; } }
+    public bool Inaccessible { get { return GameTileType.Inaccessible; } }
+    public bool Liquid { get { return GameTileType.Liquid; } }
 }
