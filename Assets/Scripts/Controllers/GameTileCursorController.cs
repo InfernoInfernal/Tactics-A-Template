@@ -24,8 +24,8 @@ public class GameTileCursorController : MonoBehaviour
     public Sprite DoubleInclinedCursorSprite;
     public InclineOrientation DoubleOrientation;
 
-    private GameObject CurrentGameTile;
     private SpriteRenderer CursorSpriteRenderer;
+    private GameObject CurrentGameTile;
     private TileSurfaceOrientation CurrentInclineOrientation;
     private TileInclineRise CurrentInclineRise;
 
@@ -45,39 +45,44 @@ public class GameTileCursorController : MonoBehaviour
             RaycastHit2D[] hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hits.Length > 0)
             {
-                //Run through the collider hits and select the highest GameTile via its Z position value
-                GameObject highestGameTile = null;
+                //Run through the collider hits and select the visibly hovered over GameTile from collider hits
+                //Which can be determined from the lowest combined X&Y tilemap cell position values
+                GameObject visibleHitGameTile = null;
+                GameTile gameTileComponent = null;
+                float lowestXY = float.MaxValue;
                 foreach (RaycastHit2D hit in hits)
                 {
-                    float highestZ = float.MinValue;
-                    if (hit.collider.gameObject.tag == GameTileTag 
-                        && hit.collider.gameObject.transform.position.z > highestZ)
+                    if (hit.collider.gameObject.tag == GameTileTag)
                     {
-                        highestGameTile = hit.collider.gameObject;
-                        highestZ = hit.collider.gameObject.transform.position.z;
+                        //Get the Game Tile Component script, throw an error if it's missing since we'll need the data
+                        gameTileComponent = hit.collider.gameObject.GetComponent<GameTile>();
+                        if (gameTileComponent == null)
+                        {
+                            Debug.LogError($"No GameTile script component found at {hit.collider.gameObject.name}");
+                            return;
+                        }
+
+                        //Lowest combined CELL value (not world) of X+Y = visible/foremost tile
+                        if (gameTileComponent.CellPositionX + gameTileComponent.CellPositionY < lowestXY)
+                        {
+                            visibleHitGameTile = hit.collider.gameObject;
+                            lowestXY = gameTileComponent.CellPositionX + gameTileComponent.CellPositionY;
+                        }
                     }
                 }
 
                 //Check to see if we moved to a new tile, and proceed with updating the cursor if so
-                if (CurrentGameTile != highestGameTile)
+                if (CurrentGameTile != visibleHitGameTile)
                 {
-                    CurrentGameTile = highestGameTile;
+                    CurrentGameTile = visibleHitGameTile;
+                    gameTileComponent = CurrentGameTile.GetComponent<GameTile>();
 
                     //Set this cursor to the position of the new GameTile.
-                    //Add 0.525f to Z: +0.5 to uniformly hover over the tile and overlapping neighbors of equal height and lower,
-                    //and the extra 0.025 will pad for any overlapping pixels on edges of said neighboring tilemap sprites
+                    //The extra 0.01f to Z draws on top of the underlying tilemap sprite
                     this.transform.position = new Vector3(
                         CurrentGameTile.transform.position.x,
                         CurrentGameTile.transform.position.y,
-                        CurrentGameTile.transform.position.z + 0.025f);
-
-                    //Get the Game Tile Component script, throw an error if it's missing since we'll need the data
-                    GameTile gameTileComponent = CurrentGameTile.GetComponent<GameTile>();
-                    if (gameTileComponent == null)
-                    {
-                        Debug.LogError($"No GameTile script component found at {CurrentGameTile.name}");
-                        return;
-                    }
+                        CurrentGameTile.transform.position.z + 0.01f);
 
                     //Check incline and orientation and update them if needed
                     if (CurrentInclineRise != gameTileComponent.InclineRise)

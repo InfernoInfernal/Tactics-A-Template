@@ -11,6 +11,10 @@ public class GameTile : MonoBehaviour
 
     [HideInInspector]
     public TileBase TileBase { get { return GameTileType.tileBase; } }
+    [HideInInspector]
+    public int CellPositionX;
+    [HideInInspector]
+    public int CellPositionY;
 
     public float TileSpriteHeight { get { return GameTileType.TileSpriteHeight; } }
     public int MovementCost { get { return GameTileType.MovementCost; } }
