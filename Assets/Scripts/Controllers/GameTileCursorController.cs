@@ -42,6 +42,7 @@ public class GameTileCursorController : MonoBehaviour
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {
             GameObject VisibleGameTile = FindVisibleGameTileUnderMouse();
+
             //Check to see if we moved to a new tile, and proceed with updating the cursor if so
             if (VisibleGameTile != null && VisibleGameTile != CurrentGameTile)
                 UpdateCurrentGameTileCursor(VisibleGameTile);
@@ -75,14 +76,13 @@ public class GameTileCursorController : MonoBehaviour
             //Run through the collider hits and select the visibly hovered over GameTile from collider hits
             //Which can be determined from the lowest combined X&Y tilemap cell position values
             GameObject visibleHitGameTile = null;
-            GameTile gameTileComponent = null;
             float lowestXY = float.MaxValue;
             foreach (RaycastHit2D hit in hits)
             {
                 if (hit.collider.gameObject.tag == GameTileTag)
                 {
                     //Get the Game Tile Component script, throw an error if it's missing since we'll need the data
-                    gameTileComponent = hit.collider.gameObject.GetComponent<GameTile>();
+                    GameTile gameTileComponent = hit.collider.gameObject.GetComponent<GameTile>();
                     if (gameTileComponent == null)
                     {
                         Debug.LogError($"No GameTile script component found at {hit.collider.gameObject.name}!");
