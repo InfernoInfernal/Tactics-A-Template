@@ -67,6 +67,11 @@ public class GameTileCursorController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Uses hits from the mouse's current position to locate colliders it is over, then deduces the one that is visible to user
+    /// from the rendering order by the lowest combined cell values of X and Y
+    /// </summary>
+    /// <returns>The visible Game Tile's game object beneath the mouse</returns>
     GameObject FindVisibleGameTileUnderMouse()
     {
         //Check for GameTile colliders under the mouse
@@ -106,6 +111,10 @@ public class GameTileCursorController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates the Game Tile Cursor to conform to the current game tile passed
+    /// </summary>
+    /// <param name="NewGameTile">The new Game Tile to conform the cursor to</param>
     void UpdateCurrentGameTileCursor(GameObject NewGameTile)
     {
         CurrentGameTile = NewGameTile;
