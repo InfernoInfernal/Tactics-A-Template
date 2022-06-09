@@ -8,9 +8,6 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public class GameTileManager : ScriptableWizard
 {
-    static readonly string TilemapTag = "Tilemap"; //Tilemap Tag
-    static readonly string GameTileTag = "GameTile"; //Game Tile Tag
-
     //Tilemap to generate/degenerate files inside (you could potentially drag this in instead of using Tilemap tag)
     public Tilemap TilemapComponent;
     //Visible list of Game Tile Type scriptable objects loaded by the wizard
@@ -31,13 +28,13 @@ public class GameTileManager : ScriptableWizard
     private void Awake()
     {
         //Find Tilemap (assumes only one tilemap instance)
-        var tilemapCheck = GameObject.FindGameObjectWithTag(TilemapTag);
+        var tilemapCheck = GameObject.FindGameObjectWithTag(Tag.Tilemap);
         if (tilemapCheck == null)
         {
             Debug.LogError("No Tilemap tag found! Cannot run Game Tile Manager Wizard.");
             return;
         }
-        TilemapComponent = GameObject.FindGameObjectWithTag(TilemapTag).GetComponent<Tilemap>();
+        TilemapComponent = GameObject.FindGameObjectWithTag(Tag.Tilemap).GetComponent<Tilemap>();
 
         //Load GameTileTypes
         string[] gameTileTypeGUIDs = AssetDatabase.FindAssets("t:GameTileType");
@@ -129,7 +126,7 @@ public class GameTileManager : ScriptableWizard
                     GameObject newGameTileObject = new GameObject($"GameTile Node X:{x} Y:{y} Z:{z}");
                     GameTile gameTileComponent = newGameTileObject.AddComponent<GameTile>();
                     gameTileComponent.GameTileType = gameTileMappingDictionary[tileBase];
-                    newGameTileObject.tag = GameTileTag;
+                    newGameTileObject.tag = Tag.GameTile;
 
                     //Calculate XYZ world position and set the game object there, then parent it to the tilemap
                     gameTileComponent.CellPositionX = x;
@@ -192,7 +189,7 @@ public class GameTileManager : ScriptableWizard
     /// </summary>
     private void DestroyGameTiles()
     {
-        GameObject[] gameTileObjects = GameObject.FindGameObjectsWithTag(GameTileTag);
+        GameObject[] gameTileObjects = GameObject.FindGameObjectsWithTag(Tag.GameTile);
 
         foreach (GameObject gameTileObject in gameTileObjects)
         {

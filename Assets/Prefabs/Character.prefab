@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8743138298325821381}
   - component: {fileID: 7829461938897520783}
+  - component: {fileID: 7723695738988490281}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -50,7 +51,23 @@ MonoBehaviour:
   FrontAnimator: {fileID: 4113330031828085634}
   BackSpriteRenderer: {fileID: 7194685946661177010}
   BackAnimator: {fileID: 2377562014971961598}
+  Team: 0
   DirectionFaced: 0
+  Movement: 0
+  HorizontalJump: 0
+  VerticalJump: 0
+--- !u!114 &7723695738988490281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3817824984925589189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4f5c9e7603363a4d9c8e117fde83ee2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7194685946661177021
 GameObject:
   m_ObjectHideFlags: 0

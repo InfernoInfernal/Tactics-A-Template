@@ -1259,6 +1259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: deef0ed278d0d304eb75de2351cc247b, type: 2}
   CellPositionX: 2
   CellPositionY: -3
@@ -1337,6 +1338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: deef0ed278d0d304eb75de2351cc247b, type: 2}
   CellPositionX: 3
   CellPositionY: -3
@@ -1415,6 +1417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: b7b296bc0cc0cf741b06e96bf18e0b75, type: 2}
   CellPositionX: 2
   CellPositionY: -1
@@ -1493,6 +1496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: b7b296bc0cc0cf741b06e96bf18e0b75, type: 2}
   CellPositionX: 0
   CellPositionY: -1
@@ -1571,6 +1575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: 2
   CellPositionY: 3
@@ -1649,6 +1654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: 1
   CellPositionY: 2
@@ -1727,6 +1733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: b7b296bc0cc0cf741b06e96bf18e0b75, type: 2}
   CellPositionX: -2
   CellPositionY: -1
@@ -1805,6 +1812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: b7b296bc0cc0cf741b06e96bf18e0b75, type: 2}
   CellPositionX: 1
   CellPositionY: -2
@@ -1883,6 +1891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 5c8fefd6cc0e2ca4d98255bab4c24acb, type: 2}
   CellPositionX: -3
   CellPositionY: 1
@@ -1961,6 +1970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: deef0ed278d0d304eb75de2351cc247b, type: 2}
   CellPositionX: 3
   CellPositionY: 2
@@ -2039,6 +2049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: b7b296bc0cc0cf741b06e96bf18e0b75, type: 2}
   CellPositionX: -1
   CellPositionY: -1
@@ -2117,6 +2128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: -3
   CellPositionY: -1
@@ -2195,6 +2207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 5c8fefd6cc0e2ca4d98255bab4c24acb, type: 2}
   CellPositionX: -1
   CellPositionY: -3
@@ -2273,6 +2286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: -1
   CellPositionY: 2
@@ -2351,6 +2365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: deef0ed278d0d304eb75de2351cc247b, type: 2}
   CellPositionX: 0
   CellPositionY: 0
@@ -2534,6 +2549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: deef0ed278d0d304eb75de2351cc247b, type: 2}
   CellPositionX: 0
   CellPositionY: 1
@@ -2612,6 +2628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: deef0ed278d0d304eb75de2351cc247b, type: 2}
   CellPositionX: -1
   CellPositionY: 0
@@ -2690,6 +2707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 8dd0dba047e51ca44853bb92ee0f0f7d, type: 2}
   CellPositionX: 2
   CellPositionY: -4
@@ -2768,6 +2786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: 0
   CellPositionY: 3
@@ -2846,6 +2865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: deef0ed278d0d304eb75de2351cc247b, type: 2}
   CellPositionX: -2
   CellPositionY: 0
@@ -2924,6 +2944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: b7b296bc0cc0cf741b06e96bf18e0b75, type: 2}
   CellPositionX: -1
   CellPositionY: -2
@@ -3002,6 +3023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: 1
   CellPositionY: 1
@@ -3080,6 +3102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: deef0ed278d0d304eb75de2351cc247b, type: 2}
   CellPositionX: -2
   CellPositionY: -3
@@ -3158,6 +3181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: deef0ed278d0d304eb75de2351cc247b, type: 2}
   CellPositionX: 0
   CellPositionY: -5
@@ -3236,6 +3260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: 1
   CellPositionY: 3
@@ -3314,6 +3339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: deef0ed278d0d304eb75de2351cc247b, type: 2}
   CellPositionX: 3
   CellPositionY: 1
@@ -3392,6 +3418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: 2
   CellPositionY: -2
@@ -3470,6 +3497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: deef0ed278d0d304eb75de2351cc247b, type: 2}
   CellPositionX: 2
   CellPositionY: -5
@@ -3548,6 +3576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: 1
   CellPositionY: 4
@@ -3626,6 +3655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: -3
   CellPositionY: -3
@@ -3704,6 +3734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 8dd0dba047e51ca44853bb92ee0f0f7d, type: 2}
   CellPositionX: -3
   CellPositionY: -4
@@ -3782,6 +3813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: deef0ed278d0d304eb75de2351cc247b, type: 2}
   CellPositionX: 0
   CellPositionY: -3
@@ -3860,6 +3892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: 2
   CellPositionY: 1
@@ -3938,6 +3971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: b7b296bc0cc0cf741b06e96bf18e0b75, type: 2}
   CellPositionX: -2
   CellPositionY: -2
@@ -4061,6 +4095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: 3
   CellPositionY: 0
@@ -4139,6 +4174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: -3
   CellPositionY: 0
@@ -4217,6 +4253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: 0
   CellPositionY: -4
@@ -4295,6 +4332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: deef0ed278d0d304eb75de2351cc247b, type: 2}
   CellPositionX: 1
   CellPositionY: -4
@@ -4373,6 +4411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: 4
   CellPositionY: 0
@@ -4451,6 +4490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: deef0ed278d0d304eb75de2351cc247b, type: 2}
   CellPositionX: 1
   CellPositionY: -5
@@ -4529,6 +4569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: -5
   CellPositionY: 2
@@ -4607,6 +4648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: 2
   CellPositionY: 0
@@ -4685,6 +4727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: 0
   CellPositionY: 2
@@ -4763,6 +4806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: b7b296bc0cc0cf741b06e96bf18e0b75, type: 2}
   CellPositionX: -3
   CellPositionY: -2
@@ -4841,6 +4885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: b7b296bc0cc0cf741b06e96bf18e0b75, type: 2}
   CellPositionX: 1
   CellPositionY: 0
@@ -4919,6 +4964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: b7b296bc0cc0cf741b06e96bf18e0b75, type: 2}
   CellPositionX: 0
   CellPositionY: -2
@@ -4997,6 +5043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: b7b296bc0cc0cf741b06e96bf18e0b75, type: 2}
   CellPositionX: 1
   CellPositionY: -1
@@ -5075,6 +5122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: 1
   CellPositionY: -3
@@ -5153,6 +5201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: -1
   CellPositionY: -4
@@ -5231,6 +5280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: deef0ed278d0d304eb75de2351cc247b, type: 2}
   CellPositionX: -2
   CellPositionY: 2
@@ -5309,6 +5359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: deef0ed278d0d304eb75de2351cc247b, type: 2}
   CellPositionX: 3
   CellPositionY: -4
@@ -5387,6 +5438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: deef0ed278d0d304eb75de2351cc247b, type: 2}
   CellPositionX: -3
   CellPositionY: 2
@@ -5465,6 +5517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: -2
   CellPositionY: -4
@@ -5543,6 +5596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d65eac975a5ac4fa9eadb46b356458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OccupyingCharacter: {fileID: 0}
   GameTileType: {fileID: 11400000, guid: 328bbbfe62ee5dc47a8fb59301c92432, type: 2}
   CellPositionX: 2
   CellPositionY: 2
@@ -5568,7 +5622,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8743138298325821381, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8743138298325821381, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5625,7 +5679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5448400587842953632, guid: 991cca25faab44345a022bf602f19e08, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 5448400587842953632, guid: 991cca25faab44345a022bf602f19e08, type: 3}
       propertyPath: m_LocalPosition.z

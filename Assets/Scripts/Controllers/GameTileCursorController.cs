@@ -16,8 +16,6 @@ public enum InclineOrientation
 /// </summary>
 public class GameTileCursorController : MonoBehaviour
 {
-    static readonly string GameTileTag = "GameTile"; //Game Tile Tag
-
     public Sprite FlatCursorSprite;
     public Sprite SingleInclinedCursorSprite;
     public InclineOrientation SingleOrientation;
@@ -41,7 +39,8 @@ public class GameTileCursorController : MonoBehaviour
         //Mouse has moved since last frame
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {
-            GameObject VisibleGameTile = FindVisibleGameTileUnderMouse();
+            GameObject VisibleGameTile = 
+                GameTileFunctions.GetGameTileFromPositionalRaycast(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
             //Check to see if we moved to a new tile, and proceed with updating the cursor if so
             if (VisibleGameTile != null && VisibleGameTile != CurrentGameTile)
@@ -51,7 +50,7 @@ public class GameTileCursorController : MonoBehaviour
         //Left Click
         if (Input.GetMouseButtonDown(0))
         {
-
+            //Center Camera on Tile?
         }
 
         //Right Click
@@ -64,50 +63,6 @@ public class GameTileCursorController : MonoBehaviour
         if (Input.mouseScrollDelta.y != 0)
         {
             
-        }
-    }
-
-    /// <summary>
-    /// Uses hits from the mouse's current position to locate colliders it is over, then deduces the one that is visible to user
-    /// from the rendering order by the lowest combined cell values of X and Y
-    /// </summary>
-    /// <returns>The visible Game Tile's game object beneath the mouse</returns>
-    GameObject FindVisibleGameTileUnderMouse()
-    {
-        //Check for GameTile colliders under the mouse
-        RaycastHit2D[] hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        if (hits.Length > 0)
-        {
-            //Run through the collider hits and select the visibly hovered over GameTile from collider hits
-            //Which can be determined from the lowest combined X&Y tilemap cell position values
-            GameObject visibleHitGameTile = null;
-            float lowestXY = float.MaxValue;
-            foreach (RaycastHit2D hit in hits)
-            {
-                if (hit.collider.gameObject.tag == GameTileTag)
-                {
-                    //Get the Game Tile Component script, throw an error if it's missing since we'll need the data
-                    GameTile gameTileComponent = hit.collider.gameObject.GetComponent<GameTile>();
-                    if (gameTileComponent == null)
-                    {
-                        Debug.LogError($"No GameTile script component found at {hit.collider.gameObject.name}!");
-                        return null;
-                    }
-
-                    //Lowest combined CELL value (not world) of X+Y = visible/foremost tile
-                    if (gameTileComponent.CellPositionX + gameTileComponent.CellPositionY < lowestXY)
-                    {
-                        visibleHitGameTile = hit.collider.gameObject;
-                        lowestXY = gameTileComponent.CellPositionX + gameTileComponent.CellPositionY;
-                    }
-                }
-            }
-            return visibleHitGameTile;
-        }
-        else
-        {
-            //No hits, return null
-            return null;
         }
     }
 
