@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Red Tron Sloped Tile
   m_EditorClassIdentifier: 
   tileBase: {fileID: 11400000, guid: 466d84e2d19e6cb44895935eb049860f, type: 2}
-  TileSpriteHeight: 0.5
+  TileSpriteHeightMaximum: 1
+  TileSpriteHeightMinimum: 0
   MovementCost: 1
   SurfaceOrientation: 1
   InclineRise: 1

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Water Animation Tile
   m_EditorClassIdentifier: 
   tileBase: {fileID: 11400000, guid: 1e77667c43b23a240a69ab4623cda6ef, type: 2}
-  TileSpriteHeight: 1
+  TileSpriteHeightMaximum: 1
+  TileSpriteHeightMinimum: 1
   MovementCost: 1
   SurfaceOrientation: 0
   InclineRise: 0

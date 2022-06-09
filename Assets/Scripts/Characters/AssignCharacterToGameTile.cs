@@ -11,9 +11,16 @@ public class AssignCharacterToGameTile : MonoBehaviour
 
         if (visibleHitGameTile != null)
         {
-            visibleHitGameTile.GetComponent<GameTile>().OccupyingCharacter = this.gameObject;
+            //TODO: Setup a static script to reference for pixels per game unit height
+            GameTile assignedGameTile = visibleHitGameTile.GetComponent<GameTile>();
+            float heightOffset = (assignedGameTile.TileSpriteHeightMaximum - assignedGameTile.TileSpriteHeightMinimum) / 8/*pixels per game unit height*/;
 
-            //TODO: move the character game object to gametile position based on pivot point
+            this.gameObject.transform.position = new Vector3(
+                visibleHitGameTile.transform.position.x, 
+                visibleHitGameTile.transform.position.y - heightOffset, //O
+                visibleHitGameTile.transform.position.z + 0.02f); //Pad Character object so it renders on top of the cursor and tile
+
+            assignedGameTile.OccupyingCharacter = this.gameObject;
         }
         else
             Debug.LogError($"No GameTile found beneath Character {this.gameObject.name}");

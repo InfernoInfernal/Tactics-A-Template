@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Red Tron Tile
   m_EditorClassIdentifier: 
   tileBase: {fileID: 11400000, guid: 9574c88671e44574c82db981b0e9c1aa, type: 2}
-  TileSpriteHeight: 1
+  TileSpriteHeightMaximum: 1
+  TileSpriteHeightMinimum: 1
   MovementCost: 1
-  SlantOrientation: 0
+  SurfaceOrientation: 0
+  InclineRise: 0
   Inaccessible: 0
   Liquid: 0

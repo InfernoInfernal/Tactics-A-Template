@@ -5612,6 +5612,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
+    - target: {fileID: 7194685946661177010, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7194685946661177010, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721201049939247439, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721201049939247439, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8743138298325821381, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
       propertyPath: m_RootOrder
       value: 3

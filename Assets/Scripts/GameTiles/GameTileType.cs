@@ -29,11 +29,13 @@ public class GameTileType : ScriptableObject
 {
     public TileBase tileBase;
 
-    public float TileSpriteHeight; //when added with Z, Used for jump and move calculation.
-                                   //For slanted tiles, uses midpoint of the incline's rise
+    [Space(10)]
+    public float TileSpriteHeightMaximum; //Game unit height from tile bottom - needed for jump and move calculations
+    public float TileSpriteHeightMinimum; //For flat tiles, same as Maximum. For inclined, game height
+                                          //from the lowest point of the slant to the tile's bottom
     public int MovementCost = 1; //Cost to walk to the tile from an adjacent one using normal movement
     public TileSurfaceOrientation SurfaceOrientation; //The default orientation of the tile's incline, if any
     public TileInclineRise InclineRise; //The rise of the tile's incline, if any
     public bool Inaccessible = false; //Set to true if the tile isn't traversable to ground units
-    public bool Liquid = false; //Whether the tile is liquid (Water or lava, for example)
+    public bool Liquid = false; //Whether the tile is liquid (water or lava, for example)
 }

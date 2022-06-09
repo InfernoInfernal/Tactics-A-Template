@@ -56,7 +56,17 @@ public class GameTileCursorController : MonoBehaviour
         //Right Click
         if (Input.GetMouseButtonDown(1))
         {
-
+            //Test Rotate
+            if (CurrentGameTile.GetComponent<GameTile>() != null && CurrentGameTile.GetComponent<GameTile>().OccupyingCharacter != null)
+            {
+                Debug.Log("Character Found, rotating");
+                var CData = CurrentGameTile.GetComponent<GameTile>().OccupyingCharacter.GetComponent<CharacterGameData>();
+                if ((int)CData.DirectionFaced == 3)
+                    CharacterFunctions.ChangeOrientation(0, CData);
+                else
+                    CharacterFunctions.ChangeOrientation(CData.DirectionFaced+1, CData);
+            }
+            //-Test Rotate
         }
 
         //Mouse Wheel Scrolled

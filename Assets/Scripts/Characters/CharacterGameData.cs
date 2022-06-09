@@ -29,12 +29,15 @@ public enum CharacterTeam
 /// </summary>
 public class CharacterGameData : MonoBehaviour
 {
+    [Header("Graphic References")]
     //Animation Data
     public SpriteRenderer FrontSpriteRenderer;
     public Animator FrontAnimator;
     public SpriteRenderer BackSpriteRenderer;
     public Animator BackAnimator;
 
+    [Space(10)]
+    [Header("Character Data")]
     //Team the Character is controlled by
     public CharacterTeam Team;
 
