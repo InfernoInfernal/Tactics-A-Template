@@ -28,13 +28,13 @@ public class GameTileManager : ScriptableWizard
     private void Awake()
     {
         //Find Tilemap (assumes only one tilemap instance)
-        var tilemapCheck = GameObject.FindGameObjectWithTag(Tag.Tilemap);
+        var tilemapCheck = GameObject.FindGameObjectWithTag(Constants.TilemapTag);
         if (tilemapCheck == null)
         {
             Debug.LogError("No Tilemap tag found! Cannot run Game Tile Manager Wizard.");
             return;
         }
-        TilemapComponent = GameObject.FindGameObjectWithTag(Tag.Tilemap).GetComponent<Tilemap>();
+        TilemapComponent = GameObject.FindGameObjectWithTag(Constants.TilemapTag).GetComponent<Tilemap>();
 
         //Load GameTileTypes
         string[] gameTileTypeGUIDs = AssetDatabase.FindAssets("t:GameTileType");
@@ -126,7 +126,7 @@ public class GameTileManager : ScriptableWizard
                     GameObject newGameTileObject = new GameObject($"GameTile Node X:{x} Y:{y} Z:{z}");
                     GameTile gameTileComponent = newGameTileObject.AddComponent<GameTile>();
                     gameTileComponent.GameTileType = gameTileMappingDictionary[tileBase];
-                    newGameTileObject.tag = Tag.GameTile;
+                    newGameTileObject.tag = Constants.GameTileTag;
 
                     //Calculate XYZ world position and set the game object there, then parent it to the tilemap
                     gameTileComponent.CellPositionX = x;
@@ -135,8 +135,8 @@ public class GameTileManager : ScriptableWizard
                     //Note that the position must be offset by the Tile Anchor Offset of the Tilemap
                     newGameTileObject.transform.position = new Vector3(
                         worldPosition.x + TilemapComponent.orientationMatrix[0,3]/*TileAnchor Offset X*/, 
-                        worldPosition.y + TilemapComponent.orientationMatrix[1,3]/*TileAnchor Offset Y*/, 
-                        z);
+                        worldPosition.y + TilemapComponent.orientationMatrix[1,3]/*TileAnchor Offset Y*/,
+                        worldPosition.z + TilemapComponent.orientationMatrix[2,3]/*TileAnchor Offset Z*/);
                     newGameTileObject.transform.parent = TilemapComponent.transform;
 
                     //Set Surface Orientation for GameTile, If rotation >= 180 it means inclined the other direction
@@ -189,7 +189,7 @@ public class GameTileManager : ScriptableWizard
     /// </summary>
     private void DestroyGameTiles()
     {
-        GameObject[] gameTileObjects = GameObject.FindGameObjectsWithTag(Tag.GameTile);
+        GameObject[] gameTileObjects = GameObject.FindGameObjectsWithTag(Constants.GameTileTag);
 
         foreach (GameObject gameTileObject in gameTileObjects)
         {

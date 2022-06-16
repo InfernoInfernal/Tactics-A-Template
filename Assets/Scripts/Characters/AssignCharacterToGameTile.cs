@@ -11,14 +11,13 @@ public class AssignCharacterToGameTile : MonoBehaviour
 
         if (visibleHitGameTile != null)
         {
-            //TODO: Setup a static script to reference for pixels per game unit height
             GameTile assignedGameTile = visibleHitGameTile.GetComponent<GameTile>();
-            float heightOffset = (assignedGameTile.TileSpriteHeightMaximum - assignedGameTile.TileSpriteHeightMinimum) / 8/*pixels per game unit height*/;
+            float heightOffset = assignedGameTile.TileSpriteHeightMaximum - assignedGameTile.TileSpriteHeightMinimum;
 
             this.gameObject.transform.position = new Vector3(
                 visibleHitGameTile.transform.position.x, 
-                visibleHitGameTile.transform.position.y - heightOffset, //O
-                visibleHitGameTile.transform.position.z + 0.02f); //Pad Character object so it renders on top of the cursor and tile
+                visibleHitGameTile.transform.position.y - (heightOffset / Constants.PixelPerGameUnitHeight),
+                visibleHitGameTile.transform.position.z - (heightOffset / 2) + 0.25f); //Pad Character object so it renders on top of the cursor and tile
 
             assignedGameTile.OccupyingCharacter = this.gameObject;
         }

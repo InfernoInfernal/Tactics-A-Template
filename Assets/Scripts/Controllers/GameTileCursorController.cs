@@ -90,7 +90,7 @@ public class GameTileCursorController : MonoBehaviour
         this.transform.position = new Vector3(
             CurrentGameTile.transform.position.x,
             CurrentGameTile.transform.position.y,
-            CurrentGameTile.transform.position.z + 0.01f);
+            CurrentGameTile.transform.position.z + 0.125f);
 
         //Check incline and orientation and update them if needed
         if (CurrentInclineRise != gameTileComponent.InclineRise)

@@ -26,7 +26,7 @@ public static class GameTileFunctions
         float lowestXY = float.MaxValue;
         foreach (RaycastHit2D hit in hits)
         {
-            if (hit.collider.gameObject.tag == Tag.GameTile)
+            if (hit.collider.gameObject.tag == Constants.GameTileTag)
             {
                 //Get the Game Tile Component script, throw an error and exit if it's missing since this should never happen
                 GameTile gameTileComponent = hit.collider.gameObject.GetComponent<GameTile>();
