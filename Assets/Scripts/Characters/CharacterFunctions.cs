@@ -8,6 +8,17 @@ using UnityEngine;
 public static class CharacterFunctions
 {
     /// <summary>
+    /// Changes the animation clip played for the character object
+    /// </summary>
+    /// <param name="newAnimationState">The new animation clip to be played</param>
+    /// <param name="characterGameData">The game data component of the character game object</param>
+    public static void ChangeAnimationState(string newAnimationState, CharacterGameData characterGameData)
+    {
+        characterGameData.FrontAnimator.SetTrigger(newAnimationState);
+        characterGameData.BackAnimator.SetTrigger(newAnimationState);
+    }
+
+    /// <summary>
     /// Changes the orientation of the character and their correspoding sprite
     /// </summary>
     /// <param name="newOrientation">The new orientation for the character to look at</param>
