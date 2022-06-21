@@ -45,12 +45,24 @@ public class GameTileCursorController : MonoBehaviour
             //Check to see if we moved to a new tile, and proceed with updating the cursor if so
             if (VisibleGameTile != null && VisibleGameTile != CurrentGameTile)
                 UpdateCurrentGameTileCursor(VisibleGameTile);
+
+            //Lerp Camera chase to tile Tile?
         }
 
         //Left Click
         if (Input.GetMouseButtonDown(0))
         {
-            //Center Camera on Tile?
+            //Test Toggle Animation between Default and Idle
+            if (CurrentGameTile.GetComponent<GameTile>() != null && CurrentGameTile.GetComponent<GameTile>().OccupyingCharacter != null)
+            {
+                Debug.Log("Character Found, toggling animation");
+                var CData = CurrentGameTile.GetComponent<GameTile>().OccupyingCharacter.GetComponent<CharacterGameData>();
+                //CData.FrontAnimator.SetTrigger("Default");
+                //CData.BackAnimator.SetTrigger("Default");
+                CData.FrontAnimator.SetTrigger("Idle");
+                CData.BackAnimator.SetTrigger("Idle");
+            }
+            //-Test Toggle Animation between Default and Idle
         }
 
         //Right Click
