@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D.Animation;
 
 /// <summary>
 /// Direction the Character is facing from the camera's perspective - front is facing towards camera, back is facing away from it
@@ -33,8 +32,10 @@ public class CharacterGameData : MonoBehaviour
     //Animation Data
     public SpriteRenderer FrontSpriteRenderer;
     public Animator FrontAnimator;
+    public SpriteLibrary FrontSpriteLibrary;
     public SpriteRenderer BackSpriteRenderer;
     public Animator BackAnimator;
+    public SpriteLibrary BackSpriteLibrary;
 
     [Space(10)]
     [Header("Character Data")]

@@ -98,7 +98,7 @@ public class GameTileCursorController : MonoBehaviour
         GameTile gameTileComponent = CurrentGameTile.GetComponent<GameTile>();
 
         //Set this cursor to the position of the new GameTile.
-        //The extra 0.01f to Z draws on top of the underlying tilemap sprite
+        //The extra 0.125f to Z draws on top of the underlying tilemap sprite
         this.transform.position = new Vector3(
             CurrentGameTile.transform.position.x,
             CurrentGameTile.transform.position.y,

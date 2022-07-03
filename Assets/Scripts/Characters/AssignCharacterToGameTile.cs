@@ -12,7 +12,7 @@ public class AssignCharacterToGameTile : MonoBehaviour
         if (visibleHitGameTile != null)
         {
             GameTile assignedGameTile = visibleHitGameTile.GetComponent<GameTile>();
-            float heightOffset = assignedGameTile.TileSpriteHeightMaximum - assignedGameTile.TileSpriteHeightMinimum;
+            float heightOffset = assignedGameTile.GameTileSpriteHeightMaximum - assignedGameTile.GameTileSpriteHeightMinimum;
 
             this.gameObject.transform.position = new Vector3(
                 visibleHitGameTile.transform.position.x, 

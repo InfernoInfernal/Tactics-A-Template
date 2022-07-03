@@ -79,7 +79,13 @@ public class GameTileManager : ScriptableWizard
         {
             foreach (GameTileType gameTileType in GameTileTypes)
             {
-                gameTileMappingDictionary.Add(gameTileType.tileBase, gameTileType);
+                if (gameTileType.GameTileBase == null)
+                {
+                    Debug.LogError($"No TileBase class for {gameTileType.name} found! GameTiles cannot be generated.");
+                    return;
+                }
+
+                gameTileMappingDictionary.Add(gameTileType.GameTileBase, gameTileType);
             }
         }
 
@@ -136,7 +142,7 @@ public class GameTileManager : ScriptableWizard
                     newGameTileObject.transform.position = new Vector3(
                         worldPosition.x + TilemapComponent.orientationMatrix[0,3]/*TileAnchor Offset X*/, 
                         worldPosition.y + TilemapComponent.orientationMatrix[1,3]/*TileAnchor Offset Y*/,
-                        worldPosition.z + TilemapComponent.orientationMatrix[2,3]/*TileAnchor Offset Z*/);
+                        worldPosition.z + TilemapComponent.orientationMatrix[2,3]/*TileAnchor Offset Z*/ + 0.001f/*Highlight Padding*/);
                     newGameTileObject.transform.parent = TilemapComponent.transform;
 
                     //Set Surface Orientation for GameTile, If rotation >= 180 it means inclined the other direction
@@ -176,6 +182,14 @@ public class GameTileManager : ScriptableWizard
 
                         collider.SetPath(i, points);
                     }
+
+                    //Add and setup highlight component
+                    SpriteRenderer spriteRenderer = newGameTileObject.AddComponent<SpriteRenderer>();
+                    spriteRenderer.enabled = false;
+                    spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
+                    spriteRenderer.sprite = gameTileComponent.GameTileHighlight;
+                    if (gameTileComponent.SurfaceOrientation == TileSurfaceOrientation.InclinedDownToRight)
+                        spriteRenderer.flipX = true;
 
                     //Break after the highest tile is found and an object created, we don't need anything for lower tiles
                     break;

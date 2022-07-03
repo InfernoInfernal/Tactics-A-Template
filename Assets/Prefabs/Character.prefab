@@ -49,8 +49,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FrontSpriteRenderer: {fileID: 7721201049939247439}
   FrontAnimator: {fileID: 4113330031828085634}
+  FrontSpriteLibrary: {fileID: 7723695738988490285}
   BackSpriteRenderer: {fileID: 7194685946661177010}
   BackAnimator: {fileID: 2377562014971961598}
+  BackSpriteLibrary: {fileID: 7723695738988490283}
   Team: 0
   DirectionFaced: 0
   Movement: 0

@@ -12,15 +12,18 @@ public class GameTile : MonoBehaviour
     public GameTileType GameTileType; //Type contains the tile information
 
     [HideInInspector]
-    public TileBase TileBase { get { return GameTileType.tileBase; } }
+    public TileBase GameTileBase { get { return GameTileType.GameTileBase; } }
+    [HideInInspector]
+    public Sprite GameTileHighlight { get { return GameTileType.GameTileHighlight; } }
     [HideInInspector]
     public int CellPositionX;
     [HideInInspector]
     public int CellPositionY;
 
-    public float TileSpriteHeightMaximum { get { return GameTileType.TileSpriteHeightMaximum; } }
-    public float TileSpriteHeightMinimum { get { return GameTileType.TileSpriteHeightMinimum; } }
+    public float GameTileSpriteHeightMaximum { get { return GameTileType.GameTileSpriteHeightMaximum; } }
+    public float GameTileSpriteHeightMinimum { get { return GameTileType.GameTileSpriteHeightMinimum; } }
     public int MovementCost { get { return GameTileType.MovementCost; } }
+    [HideInInspector]
     public TileSurfaceOrientation SurfaceOrientation;
     public TileInclineRise InclineRise { get { return GameTileType.InclineRise; } }
     public bool Inaccessible { get { return GameTileType.Inaccessible; } }

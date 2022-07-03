@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d8b91a2d08fe64e84f50db453ee500, type: 3}
   m_Name: Red Tron Tile
   m_EditorClassIdentifier: 
-  tileBase: {fileID: 11400000, guid: 9574c88671e44574c82db981b0e9c1aa, type: 2}
-  TileSpriteHeightMaximum: 1
-  TileSpriteHeightMinimum: 1
+  GameTileBase: {fileID: 11400000, guid: 9574c88671e44574c82db981b0e9c1aa, type: 2}
+  GameTileHighlight: {fileID: 21300000, guid: 23367d41e7cca524eb35e83517c5a1b6, type: 3}
+  GameTileSpriteHeightMaximum: 1
+  GameTileSpriteHeightMinimum: 1
   MovementCost: 1
   SurfaceOrientation: 0
   InclineRise: 0
