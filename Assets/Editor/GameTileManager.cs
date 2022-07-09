@@ -137,6 +137,7 @@ public class GameTileManager : ScriptableWizard
                     //Calculate XYZ world position and set the game object there, then parent it to the tilemap
                     gameTileComponent.CellPositionX = x;
                     gameTileComponent.CellPositionY = y;
+                    gameTileComponent.CellPositionZ = z;
                     Vector3 worldPosition = TilemapComponent.CellToWorld(new Vector3Int(x, y, z));
                     //Note that the position must be offset by the Tile Anchor Offset of the Tilemap
                     newGameTileObject.transform.position = new Vector3(

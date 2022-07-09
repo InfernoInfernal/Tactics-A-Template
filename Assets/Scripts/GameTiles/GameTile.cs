@@ -19,6 +19,8 @@ public class GameTile : MonoBehaviour
     public int CellPositionX;
     [HideInInspector]
     public int CellPositionY;
+    [HideInInspector]
+    public int CellPositionZ;
 
     public float GameTileSpriteHeightMaximum { get { return GameTileType.GameTileSpriteHeightMaximum; } }
     public float GameTileSpriteHeightMinimum { get { return GameTileType.GameTileSpriteHeightMinimum; } }
