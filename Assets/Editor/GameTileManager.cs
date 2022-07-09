@@ -12,6 +12,9 @@ public class GameTileManager : ScriptableWizard
     public Tilemap TilemapComponent;
     //Visible list of Game Tile Type scriptable objects loaded by the wizard
     public List<GameTileType> GameTileTypes = new List<GameTileType>();
+    //GameTileTracker monobehaviour that contains the GameTileDictionary for tracking all the Game Object GameTiles by their grid coordinates
+    [HideInInspector]
+    public GameTileTracker GameTileTrackerComponent = null;
 
     /// <summary>
     /// Wizard Constructor
@@ -23,7 +26,7 @@ public class GameTileManager : ScriptableWizard
     }
 
     /// <summary>
-    /// Awake function will find and load the tilemap and gametiletypes in assets
+    /// Awake function will find and load the tilemap, gametiletracker, and gametiletypes in assets
     /// </summary>
     private void Awake()
     {
@@ -35,6 +38,11 @@ public class GameTileManager : ScriptableWizard
             return;
         }
         TilemapComponent = GameObject.FindGameObjectWithTag(Constants.TilemapTag).GetComponent<Tilemap>();
+
+        //Attach GameTileTracker if it hasn't been added to the Tilemap
+        GameTileTrackerComponent = GameObject.FindGameObjectWithTag(Constants.TilemapTag).GetComponent<GameTileTracker>();
+        if (GameTileTrackerComponent == null)
+            GameTileTrackerComponent = GameObject.FindGameObjectWithTag(Constants.TilemapTag).AddComponent<GameTileTracker>();
 
         //Load GameTileTypes
         string[] gameTileTypeGUIDs = AssetDatabase.FindAssets("t:GameTileType");
@@ -192,6 +200,10 @@ public class GameTileManager : ScriptableWizard
                     if (gameTileComponent.SurfaceOrientation == TileSurfaceOrientation.InclinedDownToRight)
                         spriteRenderer.flipX = true;
 
+                    //lastly, Add the GameTile's Game Object to the GameTileDictionary for tracking
+                    GameTileTrackerComponent.GameTileDictionary.Add(new Vector2(x, y), newGameTileObject);
+                    //Debug.Log($"GameTileDictionary Entry with x:{x} y:{y} {newGameTileObject.name}");
+
                     //Break after the highest tile is found and an object created, we don't need anything for lower tiles
                     break;
                 }
@@ -210,5 +222,7 @@ public class GameTileManager : ScriptableWizard
         {
             DestroyImmediate(gameTileObject);
         }
+
+        GameTileTrackerComponent.GameTileDictionary.Clear();
     }
 }
