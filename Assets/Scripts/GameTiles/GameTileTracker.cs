@@ -7,5 +7,5 @@ using UnityEngine;
 /// </summary>
 public class GameTileTracker : MonoBehaviour
 {
-    public Dictionary<Vector2, GameObject> GameTileDictionary = new Dictionary<Vector2, GameObject>();
+    public Dictionary<Vector2Int, GameObject> GameTileDictionary = new Dictionary<Vector2Int, GameObject>();
 }

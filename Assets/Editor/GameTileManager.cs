@@ -201,7 +201,7 @@ public class GameTileManager : ScriptableWizard
                         spriteRenderer.flipX = true;
 
                     //lastly, Add the GameTile's Game Object to the GameTileDictionary for tracking
-                    GameTileTrackerComponent.GameTileDictionary.Add(new Vector2(x, y), newGameTileObject);
+                    GameTileTrackerComponent.GameTileDictionary.Add(new Vector2Int(x, y), newGameTileObject);
                     //Debug.Log($"GameTileDictionary Entry with x:{x} y:{y} {newGameTileObject.name}");
 
                     //Break after the highest tile is found and an object created, we don't need anything for lower tiles
