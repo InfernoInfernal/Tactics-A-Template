@@ -22,8 +22,8 @@ public class GameTile : MonoBehaviour
     [HideInInspector]
     public int CellPositionZ;
 
-    public float GameTileSpriteHeightMaximum { get { return GameTileType.GameTileSpriteHeightMaximum; } }
-    public float GameTileSpriteHeightMinimum { get { return GameTileType.GameTileSpriteHeightMinimum; } }
+    public int GameTileSpriteHeightMaximum { get { return GameTileType.GameTileSpriteHeightMaximum; } }
+    public int GameTileSpriteHeightMinimum { get { return GameTileType.GameTileSpriteHeightMinimum; } }
     public int MovementCost { get { return GameTileType.MovementCost; } }
     [HideInInspector]
     public TileSurfaceOrientation SurfaceOrientation;
