@@ -52,11 +52,6 @@ public static class GameTileFunctions
     //Dijkstra:
     //- Return all tiles with each tile paired to preceding one for movement controller via Dictionary
 
-    //The purpose of a game tile function should be:
-    //HighlightToggle: to highlight or unhighlight
-    //ColorHighlights: set the color of a list of renderers for highlighting game tiles
-    //GetPossibleDestinations: Fetch a given group based on certain parameters
-
     //Rules of (Non-Flying/Non-Teleporting) Movement:
     //When jumping horizontally, the destination tile and all tiles between must be lower than the starting point
 
@@ -106,7 +101,7 @@ public static class GameTileFunctions
                 int moveCost = GameTileDictionary[travelPair.Key].GetComponent<GameTile>().MovementCost;
                 for (int direction = 0; direction < 4; direction++)
                 {
-                    for (int newDistance = 0; newDistance < MaxLeapWidth + 1; newDistance++)
+                    for (int newDistance = 1; newDistance < MaxLeapWidth + 1; newDistance++)
                     {
                         //if maxDistance is exceeded, no need for further searching in this direction
                         if (currentDistance + (newDistance * moveCost) > MaxDistance)
@@ -139,7 +134,7 @@ public static class GameTileFunctions
 
                         //Additional validation checks
                         if (!GameTileDictionary.ContainsKey(newCoordinates) //Has an actual game tile
-                            || finalizedDestinations.ContainsKey(GameTileDictionary[newCoordinates]) //THe destination not finalized
+                            || finalizedDestinations.ContainsKey(GameTileDictionary[newCoordinates]) //Destination not finalized
                             || GameTileDictionary[newCoordinates].GetComponent<GameTile>().Inaccessible //Is accessible
                             //TODO: Remaining Checks
                             )
@@ -164,7 +159,7 @@ public static class GameTileFunctions
 
 
 
-                        //Upon passing all validation, add the new tile to the frontier
+                        //Upon passing all validation, add the new tile to the frontier for future exploration
                         //according to its movement cost, with origin as the preceding tile
                         frontiers[currentDistance + (newDistance * moveCost)][newCoordinates] = travelPair.Key;
                     }
