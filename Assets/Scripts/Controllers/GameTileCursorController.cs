@@ -52,15 +52,37 @@ public class GameTileCursorController : MonoBehaviour
         //Left Click
         if (Input.GetMouseButtonDown(0))
         {
-            //Test Toggle Animation between Default and Idle
+            //Test Highlight Surrounding Tiles
             GameTile currentGameTileComponent = CurrentGameTile.GetComponent<GameTile>();
             if (currentGameTileComponent != null && currentGameTileComponent.OccupyingCharacter != null)
             {
-                Debug.Log("Character Found, toggling animation");
-                CharacterGameData cData = currentGameTileComponent.OccupyingCharacter.GetComponent<CharacterGameData>();
-                //CharacterFunctions.ChangeAnimationState("Default", cData);
-                CharacterFunctions.ChangeAnimationState("Idle", cData);
+                Debug.Log("Character Found, highlighting pathfinding returns");
+                GameTileTracker gameTileTracker = GameObject.FindGameObjectWithTag(Constants.TilemapTag).GetComponent<GameTileTracker>();
+                CharacterGameData currentCharacterGameData = currentGameTileComponent.OccupyingCharacter.GetComponent<CharacterGameData>();
+
+                var PathfindingMap = GameTileFunctions.GetDestinationGameTiles(
+                    gameTileTracker.GameTileDictionary,
+                    new Vector2Int(currentGameTileComponent.CellPositionX, currentGameTileComponent.CellPositionY),
+                    currentCharacterGameData.Movement,
+                    currentCharacterGameData.VerticalJump,
+                    currentCharacterGameData.HorizontalJump);
+
+                foreach (var keyTile in PathfindingMap.Keys)
+                {
+                    GameTileFunctions.HighlightGameTile(keyTile, Color.cyan, gameTileTracker.HighlightedRenderers);
+                }
             }
+            //-Test Highlight Surrounding Tiles
+
+            //Test Toggle Animation between Default and Idle
+            //GameTile currentGameTileComponent = CurrentGameTile.GetComponent<GameTile>();
+            //if (currentGameTileComponent != null && currentGameTileComponent.OccupyingCharacter != null)
+            //{
+            //    Debug.Log("Character Found, toggling animation");
+            //    CharacterGameData cData = currentGameTileComponent.OccupyingCharacter.GetComponent<CharacterGameData>();
+            //    //CharacterFunctions.ChangeAnimationState("Default", cData);
+            //    CharacterFunctions.ChangeAnimationState("Idle", cData);
+            //}
             //-Test Toggle Animation between Default and Idle
         }
 
