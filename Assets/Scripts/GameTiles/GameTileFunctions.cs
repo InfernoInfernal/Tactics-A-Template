@@ -49,11 +49,16 @@ public static class GameTileFunctions
         return visibleHitGameTile;
     }
 
-    //Dijkstra:
-    //- Return all tiles with each tile paired to preceding one for movement controller via Dictionary
-
     //Rules of (Non-Flying/Non-Teleporting) Movement:
-    //When jumping horizontally, the destination tile and all tiles between must be lower than the starting point
+    //You can jump up or down an adjacent tile up to max jump height
+    //When leaping horizontally, the destination tile and all tiles between must be lower than the starting point.
+    //Inaccesible tiles and empty space with no tiles in the grid can be leaped over
+    //You can leap horizontally and jump down at the same time up to both maximums
+    //You CANNOT leap horizontally and jump vertically UP at the same time
+    //You cannot share a space or pass through an opposing unit unless BypassEnemy parameter is set to true
+    //You CAN leap over opposing units horizontally, but only if you have plenty of spaces (3 units) over their sprite
+    //Water is treated the same as solid tiles for movement/jumping
+    //Water can be treated as an inaccessible tile with AvoidWater set to true
 
     /// <summary>
     /// Movement for non-flying/non-teleporting units
@@ -65,9 +70,9 @@ public static class GameTileFunctions
     /// <param name="MaxLeapWidth">Number of tiles that can be leapt over at once</param>
     /// <param name="BypassEnemy"></param>
     /// <param name="AvoidWater"></param>
-    /// <returns>Return dictionary of tile mappings for pathfinding
-    /// NOTE: this includes game tiles that are occupied, such as the origin game tile. 
-    /// Game tiles will still need to be validated against occupants while performing moves with this data.</returns>
+    /// <returns>Return all tiles with each tile paired to preceding one for movement controller via Dictionary
+    /// NOTE: this includes game tiles that are occupied by allies, such as the origin game tile. 
+    /// Game tiles will still need to be validated against allied occupants while performing moves with this data.</returns>
     public static Dictionary<GameObject, GameObject> GetDestinationGameTiles(
         Dictionary<Vector2Int, GameObject> GameTileDictionary, Vector2Int OriginGameTile, int MaxDistance,
         int MaxJumpHeight, int MaxLeapWidth, bool BypassEnemy = false, bool AvoidWater = false)
@@ -104,7 +109,7 @@ public static class GameTileFunctions
                 GameTile currentGameTileComponent = GameTileDictionary[travelPair.Key].GetComponent<GameTile>();
                 int moveCost = currentGameTileComponent.MovementCost;
                 int originHeightMax = currentGameTileComponent.CellPositionZ + currentGameTileComponent.GameTileSpriteHeightMaximum;
-                int originHeightMin = currentGameTileComponent.CellPositionZ + currentGameTileComponent.GameTileSpriteHeightMaximum;
+                int originHeightMin = currentGameTileComponent.CellPositionZ + currentGameTileComponent.GameTileSpriteHeightMinimum;
                 for (int direction = 0; direction < 4; direction++)
                 {
                     for (int newDistance = 1; newDistance < MaxLeapWidth + 1; newDistance++)
@@ -129,67 +134,86 @@ public static class GameTileFunctions
                                 newCoordinates = new Vector2Int(travelPair.Key.x, travelPair.Key.y - newDistance);
                                 break;
                         }
+                        if (!GameTileDictionary.ContainsKey(newCoordinates)) //Verify has an actual game tile or we can just skip over
+                            continue;
                         GameTile newGameTileComponent = GameTileDictionary[newCoordinates].GetComponent<GameTile>();
 
-
-                        //Initial validation checks to see if the tile can be passed
-                        if (!GameTileDictionary.ContainsKey(newCoordinates)) //Verify Has an actual game tile
+                        //Determine if the tile is blocked by an opposing team and we're not bypassing
+                        bool opposedCharacterBlocking = false;
+                        if (!BypassEnemy && newGameTileComponent.OccupyingCharacter != null)
                         {
-                            continue;
+                            CharacterTeam occupiedCharacterTeam =
+                                GameTileDictionary[OriginGameTile].GetComponent<GameTile>().OccupyingCharacter.GetComponent<CharacterGameData>().Team;
+
+                            if ((occupiedCharacterTeam != CharacterTeam.Enemy && originCharacterTeam == CharacterTeam.Enemy) ||
+                                (occupiedCharacterTeam == CharacterTeam.Enemy && originCharacterTeam != CharacterTeam.Enemy))
+                            {
+                                opposedCharacterBlocking = true;
+                            }
                         }
 
+                        //If there is an opposer in a tile to be jumped over (and not bypassing), treat it as 3 higher for purposes of jumping over
+                        //Cannot walk through blocked tile, but might be able to jump over
+                        //If jumping, ensure valid tile height for jumping over (even for the first tile) or no point in proceeding in this direction
 
-                        //If we are jumping, make sure the tile height is valid for jumping over or no point in proceeding in this direction
-                        if (newDistance > 1)
+                        bool jumpBeyondInvalid = false;
+
+                        int newHeightMax = newGameTileComponent.CellPositionZ + newGameTileComponent.GameTileSpriteHeightMaximum;
+                        int newHeightMin = newGameTileComponent.CellPositionZ + newGameTileComponent.GameTileSpriteHeightMinimum;
+
+                        if (opposedCharacterBlocking) //Padding for jumping over
                         {
-                            //If there is an enemy in a tile to be jumped over (and not bypassing), treat it as 3 higher for purposes of jumping over
-                            int newHeightMax = newGameTileComponent.CellPositionZ + newGameTileComponent.GameTileSpriteHeightMaximum;
-                            if (!BypassEnemy && newGameTileComponent.OccupyingCharacter != null)
+                            newHeightMax += 3;
+                            newHeightMin += 3;
+                        }
+                        
+                        if (newDistance == 1)
+                        {
+                            if (newHeightMax > originHeightMin)
                             {
-                                CharacterTeam occupiedCharacterTeam =
-                                    GameTileDictionary[OriginGameTile].GetComponent<GameTile>().OccupyingCharacter.GetComponent<CharacterGameData>().Team;
+                                jumpBeyondInvalid = true; //We can't jump over but still need to evaluate this tile for walkability
 
-                                if ((occupiedCharacterTeam != CharacterTeam.Enemy && originCharacterTeam == CharacterTeam.Enemy) ||
-                                    (occupiedCharacterTeam == CharacterTeam.Enemy && originCharacterTeam != CharacterTeam.Enemy))
-                                {
-                                    newHeightMax += 3;
-                                }
+                                if (opposedCharacterBlocking)
+                                    break; //If we can't jump over OR land in the tile, exit this direction
+
+                                if (originHeightMax + MaxJumpHeight < newHeightMin)
+                                    break; //If too high to jump and can't go over, exit this direction
+                            }
+                            else if (opposedCharacterBlocking)
+                            {
+                                continue; //If we can't land in the tile but can still jump over, skip to next
+                            }
+                        }
+                        else if (newDistance > 1)
+                        {
+                            if (newHeightMax > originHeightMin)
+                            {
+                                break; //Being too high for a horizontal jump means we can just exit early for this whole direction
                             }
 
-                            if (originHeightMin > newHeightMax)
-                                break;
+                            if (opposedCharacterBlocking)
+                            {
+                                continue; //We can jump over the tile but can't land in it, skip to next
+                            }
                         }
 
-
                         //Additional validation checks
-                        if (finalizedDestinations.ContainsKey(GameTileDictionary[newCoordinates]) //Destination not finalized
-                            || newGameTileComponent.Inaccessible //Is accessible
-                            //TODO: Remaining Checks
+                        if (finalizedDestinations.ContainsKey(GameTileDictionary[newCoordinates])   //Destination already finalized
+                            || newGameTileComponent.Inaccessible                                    //Not accessible
+                            || (AvoidWater && newGameTileComponent.Liquid)                          //Can't swim
+                            || (originHeightMin - MaxJumpHeight > newHeightMax)                     //Too low to jump down to
                             )
                         {
                             continue;
                         }
-                        
-
-                        if (!BypassEnemy 
-                            && newGameTileComponent.OccupyingCharacter != null
-                            ) //Enemy Check
-                            //When jumping horizontally, the destination tile and all tiles between must be lower than the starting point
-                            //Tiles with enemies count as 3 height greater, unless BypassEnemy = true
-                        {
-                            //TODO
-                        }
-
-                        if (AvoidWater) //Avoid Water Check
-                        {
-                            //TODO
-                        }
-
-
 
                         //Upon passing all validation, add the new tile to the frontier for future exploration
                         //according to its movement cost, with origin as the preceding tile
                         frontiers[currentDistance + (newDistance * moveCost)][newCoordinates] = travelPair.Key;
+
+                        //If we can't jump any farther after the initial walk, break the loop
+                        if (jumpBeyondInvalid)
+                            break;
                     }
                 }
             }

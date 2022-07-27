@@ -56,7 +56,8 @@ public class GameTileCursorController : MonoBehaviour
             GameTile currentGameTileComponent = CurrentGameTile.GetComponent<GameTile>();
             if (currentGameTileComponent != null && currentGameTileComponent.OccupyingCharacter != null)
             {
-                Debug.Log("Character Found, highlighting pathfinding returns");
+                Debug.Log($"Character Found at X:{currentGameTileComponent.CellPositionX} " +
+                    $"Y:{currentGameTileComponent.CellPositionY}, highlighting pathfinding returns");
                 GameTileTracker gameTileTracker = GameObject.FindGameObjectWithTag(Constants.TilemapTag).GetComponent<GameTileTracker>();
                 CharacterGameData currentCharacterGameData = currentGameTileComponent.OccupyingCharacter.GetComponent<CharacterGameData>();
 
