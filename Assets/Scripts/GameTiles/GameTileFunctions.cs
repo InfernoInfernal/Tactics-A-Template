@@ -74,6 +74,9 @@ public static class GameTileFunctions
     {
         //Dictionary of finalized selections
         Dictionary<GameObject, GameObject> finalizedDestinations = new Dictionary<GameObject, GameObject>();
+        //Origin Game Tile's character's team will be used to check against the teams of other characters for bypassing
+        CharacterTeam originCharacterTeam = 
+            GameTileDictionary[OriginGameTile].GetComponent<GameTile>().OccupyingCharacter.GetComponent<CharacterGameData>().Team;
 
         //frontiers breakdown:
         //List Index = Total Movement Cost for destinations from first origin
@@ -98,7 +101,10 @@ public static class GameTileFunctions
                 finalizedDestinations.Add(GameTileDictionary[travelPair.Key], GameTileDictionary[travelPair.Value]);
 
                 //Loop through distance for each direction for walking/jumping
-                int moveCost = GameTileDictionary[travelPair.Key].GetComponent<GameTile>().MovementCost;
+                GameTile currentGameTileComponent = GameTileDictionary[travelPair.Key].GetComponent<GameTile>();
+                int moveCost = currentGameTileComponent.MovementCost;
+                int originHeightMax = currentGameTileComponent.CellPositionZ + currentGameTileComponent.GameTileSpriteHeightMaximum;
+                int originHeightMin = currentGameTileComponent.CellPositionZ + currentGameTileComponent.GameTileSpriteHeightMaximum;
                 for (int direction = 0; direction < 4; direction++)
                 {
                     for (int newDistance = 1; newDistance < MaxLeapWidth + 1; newDistance++)
@@ -123,19 +129,41 @@ public static class GameTileFunctions
                                 newCoordinates = new Vector2Int(travelPair.Key.x, travelPair.Key.y - newDistance);
                                 break;
                         }
+                        GameTile newGameTileComponent = GameTileDictionary[newCoordinates].GetComponent<GameTile>();
 
-                        //If we are jumping, make sure the tile height is valid or no point in proceeding in this direction
-                        if (newDistance > 1)
+
+                        //Initial validation checks to see if the tile can be passed
+                        if (!GameTileDictionary.ContainsKey(newCoordinates)) //Verify Has an actual game tile
                         {
-                            //TODO
-                            //If Tile Occupied, !bypass +3
-                            break;
+                            continue;
                         }
 
+
+                        //If we are jumping, make sure the tile height is valid for jumping over or no point in proceeding in this direction
+                        if (newDistance > 1)
+                        {
+                            //If there is an enemy in a tile to be jumped over (and not bypassing), treat it as 3 higher for purposes of jumping over
+                            int newHeightMax = newGameTileComponent.CellPositionZ + newGameTileComponent.GameTileSpriteHeightMaximum;
+                            if (!BypassEnemy && newGameTileComponent.OccupyingCharacter != null)
+                            {
+                                CharacterTeam occupiedCharacterTeam =
+                                    GameTileDictionary[OriginGameTile].GetComponent<GameTile>().OccupyingCharacter.GetComponent<CharacterGameData>().Team;
+
+                                if ((occupiedCharacterTeam != CharacterTeam.Enemy && originCharacterTeam == CharacterTeam.Enemy) ||
+                                    (occupiedCharacterTeam == CharacterTeam.Enemy && originCharacterTeam != CharacterTeam.Enemy))
+                                {
+                                    newHeightMax += 3;
+                                }
+                            }
+
+                            if (originHeightMin > newHeightMax)
+                                break;
+                        }
+
+
                         //Additional validation checks
-                        if (!GameTileDictionary.ContainsKey(newCoordinates) //Has an actual game tile
-                            || finalizedDestinations.ContainsKey(GameTileDictionary[newCoordinates]) //Destination not finalized
-                            || GameTileDictionary[newCoordinates].GetComponent<GameTile>().Inaccessible //Is accessible
+                        if (finalizedDestinations.ContainsKey(GameTileDictionary[newCoordinates]) //Destination not finalized
+                            || newGameTileComponent.Inaccessible //Is accessible
                             //TODO: Remaining Checks
                             )
                         {
@@ -144,7 +172,7 @@ public static class GameTileFunctions
                         
 
                         if (!BypassEnemy 
-                            && GameTileDictionary[newCoordinates].GetComponent<GameTile>().OccupyingCharacter != null
+                            && newGameTileComponent.OccupyingCharacter != null
                             ) //Enemy Check
                             //When jumping horizontally, the destination tile and all tiles between must be lower than the starting point
                             //Tiles with enemies count as 3 height greater, unless BypassEnemy = true
