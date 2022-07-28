@@ -20,4 +20,4 @@ MonoBehaviour:
   SurfaceOrientation: 0
   InclineRise: 0
   Inaccessible: 0
-  Liquid: 1
+  Water: 1
