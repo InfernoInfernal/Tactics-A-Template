@@ -29,5 +29,5 @@ public class GameTile : MonoBehaviour
     public TileSurfaceOrientation SurfaceOrientation;
     public TileInclineRise InclineRise { get { return GameTileType.InclineRise; } }
     public bool Inaccessible { get { return GameTileType.Inaccessible; } }
-    public bool Liquid { get { return GameTileType.Liquid; } }
+    public bool Water { get { return GameTileType.Water; } }
 }

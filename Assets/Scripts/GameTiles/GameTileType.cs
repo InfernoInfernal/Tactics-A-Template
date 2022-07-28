@@ -37,6 +37,6 @@ public class GameTileType : ScriptableObject
     public int MovementCost = 1; //Cost to walk to the tile from an adjacent one using normal movement
     public TileSurfaceOrientation SurfaceOrientation; //The default orientation of the tile's incline, if any
     public TileInclineRise InclineRise; //The rise of the tile's incline, if any
-    public bool Inaccessible = false; //Set to true if the tile isn't traversable to ground units
-    public bool Liquid = false; //Whether the tile is liquid (water or lava, for example)
+    public bool Inaccessible = false; //Set to true if the tile cannot be landed on (but could be leapt or flown over)
+    public bool Water = false; //Whether the tile is water
 }
