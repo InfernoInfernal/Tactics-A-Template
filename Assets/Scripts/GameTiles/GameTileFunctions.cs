@@ -56,7 +56,7 @@ public static class GameTileFunctions
     //You can leap horizontally and jump down at the same time up to both maximums
     //You CANNOT leap horizontally and jump vertically UP at the same time
     //You cannot share a space or pass through an opposing unit unless BypassEnemy parameter is set to true
-    //You CAN leap over opposing units horizontally, but only if you have plenty of spaces (3 units) over their sprite
+    //You CAN leap over opposing units horizontally if you pad enough spaces (3 units) over their sprite pivot to clear the whole sprite
     //Water is treated the same as solid tiles for movement/jumping
     //Water can be treated as an inaccessible tile with AvoidWater set to true
 
@@ -200,7 +200,7 @@ public static class GameTileFunctions
                         //Additional validation checks
                         if (finalizedDestinations.ContainsKey(GameTileDictionary[newCoordinates])   //Destination already finalized
                             || newGameTileComponent.Inaccessible                                    //Not accessible
-                            || (AvoidWater && newGameTileComponent.Liquid)                          //Can't swim
+                            || (AvoidWater && newGameTileComponent.Water)                           //Can't swim
                             || (originHeightMin - MaxJumpHeight > newHeightMax)                     //Too low to jump down to
                             )
                         {
