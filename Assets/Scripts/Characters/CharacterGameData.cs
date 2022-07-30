@@ -45,6 +45,9 @@ public class CharacterGameData : MonoBehaviour
     //Character Direction
     public CharacterDirectionFacing DirectionFaced;
 
+    //State to determine whether the character can act during this turn/action
+    public bool CharacterActive = false;
+
     //Number of Game Tiles that can be traversed in one move
     public int Movement;
     //Number of game height units that can be jumped up

@@ -4812,15 +4812,15 @@ PrefabInstance:
       objectReference: {fileID: 7108339969198208228, guid: 3d91022b686afe449abc3d45c9e0cb44, type: 3}
     - target: {fileID: 7829461938897520783, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
       propertyPath: Movement
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7829461938897520783, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
       propertyPath: VerticalJump
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7829461938897520783, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
       propertyPath: HorizontalJump
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8743138298325821381, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
       propertyPath: m_RootOrder

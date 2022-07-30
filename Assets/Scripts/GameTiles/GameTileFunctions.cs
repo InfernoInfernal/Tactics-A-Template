@@ -241,43 +241,24 @@ public static class GameTileFunctions
     }
 
     /// <summary>
-    /// Highlight a game tile renderer with a given color
+    /// Highlight a game tile renderer with a given color and enabling it
     /// </summary>
     /// <param name="GameTileGameObject">game tile game object to highlight</param>
     /// <param name="NewColor">Color to apply to highlight</param>
-    /// <param name="HighlightedRenderers">GameTileTracker element for managing game tile highlights</param>
-    public static void HighlightGameTile(GameObject GameTileGameObject, Color NewColor,
-        Dictionary<Renderer, Color> HighlightedRenderers)
+    public static void HighlightGameTile(GameObject GameTileGameObject, Color NewColor)
     {
         SpriteRenderer spriteRenderer = GameTileGameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.color = NewColor;
         spriteRenderer.enabled = true;
-        HighlightedRenderers[spriteRenderer] = NewColor;
     }
 
     /// <summary>
-    /// Unhightlight all game tile renderers in a list
+    /// Unhightlight a game tile renderer by disabling it
     /// </summary>
     /// <param name="GameTileGameObject">game tile game object to unhighlight</param>
-    /// <param name="HighlightedRenderers">GameTileTracker element for managing game tile highlights</param>
-    public static void UnhighlightGameTile(GameObject GameTileGameObject,
-        Dictionary<Renderer, Color> HighlightedRenderers)
+    public static void UnhighlightGameTile(GameObject GameTileGameObject)
     {
         SpriteRenderer spriteRenderer = GameTileGameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.enabled = false;
-        HighlightedRenderers.Remove(spriteRenderer);
-    }
-
-    /// <summary>
-    /// Unhightlight all game tile renderers the GameTileTracker renderers
-    /// </summary>
-    /// <param name="HighlightedRenderers">GameTileTracker element for managing game tile highlights</param>
-    public static void UnhighlightAllGameTiles(Dictionary<Renderer, Color> HighlightedRenderers)
-    {
-        foreach (Renderer spriteRenderer in HighlightedRenderers.Keys)
-        {
-            spriteRenderer.enabled = false;
-            HighlightedRenderers.Remove(spriteRenderer);
-        }
     }
 }

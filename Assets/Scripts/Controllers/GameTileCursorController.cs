@@ -46,36 +46,74 @@ public class GameTileCursorController : MonoBehaviour
             if (VisibleGameTile != null && VisibleGameTile != CurrentGameTile)
                 UpdateCurrentGameTileCursor(VisibleGameTile);
 
+            #region Test Highlight Path
+            //GameTileTracker gameTileTracker = GameObject.FindGameObjectWithTag(Constants.TilemapTag).GetComponent<GameTileTracker>();
+            //if (gameTileTracker.HighlightedPath.Count > 0 && gameTileTracker.DestinationPathfindingMap.ContainsKey(CurrentGameTile))
+            //{
+            //    foreach (GameObject highlightedPathGameTile in gameTileTracker.HighlightedPath) //HighlightedGameTile inherently flawed logic?
+            //    {
+            //        GameTileFunctions.HighlightGameTile(highlightedPathGameTile, Color.cyan);
+            //    }
+            //    gameTileTracker.HighlightedPath.Clear();
+
+            //    GameObject backtraceGameTile = CurrentGameTile;
+            //    while (backtraceGameTile != null)
+            //    {
+            //        GameTileFunctions.HighlightGameTile(backtraceGameTile, Color.yellow);
+            //        gameTileTracker.HighlightedPath.Add(backtraceGameTile);
+            //        backtraceGameTile = gameTileTracker.DestinationPathfindingMap[backtraceGameTile];
+            //    }
+            //}
+            #endregion
+
             //Lerp Camera chase to tile Tile?
         }
 
         //Left Click
         if (Input.GetMouseButtonDown(0))
         {
-            //Test Highlight Surrounding Tiles
-            GameTile currentGameTileComponent = CurrentGameTile.GetComponent<GameTile>();
-            if (currentGameTileComponent != null && currentGameTileComponent.OccupyingCharacter != null)
-            {
-                Debug.Log($"Character Found at X:{currentGameTileComponent.CellPositionX} " +
-                    $"Y:{currentGameTileComponent.CellPositionY}, highlighting pathfinding returns");
-                GameTileTracker gameTileTracker = GameObject.FindGameObjectWithTag(Constants.TilemapTag).GetComponent<GameTileTracker>();
-                CharacterGameData currentCharacterGameData = currentGameTileComponent.OccupyingCharacter.GetComponent<CharacterGameData>();
+            #region Test Highlight Surrounding Tiles
+            //GameTile currentGameTileComponent = CurrentGameTile.GetComponent<GameTile>();
+            //if (currentGameTileComponent != null && currentGameTileComponent.OccupyingCharacter != null 
+            //    /*&& currentGameTileComponent.OccupyingCharacter.GetComponent<CharacterGameData>().CharacterActive*/)
+            //{
+            //    Debug.Log($"Character Found at X:{currentGameTileComponent.CellPositionX} " +
+            //        $"Y:{currentGameTileComponent.CellPositionY}, highlighting pathfinding returns");
+            //    GameTileTracker gameTileTracker = GameObject.FindGameObjectWithTag(Constants.TilemapTag).GetComponent<GameTileTracker>();
+            //    if (gameTileTracker.DestinationPathfindingMap.Count == 0)
+            //    {
+            //        CharacterGameData currentCharacterGameData = currentGameTileComponent.OccupyingCharacter.GetComponent<CharacterGameData>();
 
-                var PathfindingMap = GameTileFunctions.GetDestinationGameTiles(
-                    gameTileTracker.GameTileDictionary,
-                    new Vector2Int(currentGameTileComponent.CellPositionX, currentGameTileComponent.CellPositionY),
-                    currentCharacterGameData.Movement,
-                    currentCharacterGameData.VerticalJump,
-                    currentCharacterGameData.HorizontalJump);
+            //        gameTileTracker.DestinationPathfindingMap = GameTileFunctions.GetDestinationGameTiles(
+            //            gameTileTracker.GameTileDictionary,
+            //            new Vector2Int(currentGameTileComponent.CellPositionX, currentGameTileComponent.CellPositionY),
+            //            currentCharacterGameData.Movement,
+            //            currentCharacterGameData.VerticalJump,
+            //            currentCharacterGameData.HorizontalJump,
+            //            false,
+            //            false);
 
-                foreach (var keyTile in PathfindingMap.Keys)
-                {
-                    GameTileFunctions.HighlightGameTile(keyTile, Color.cyan, gameTileTracker.HighlightedRenderers);
-                }
-            }
-            //-Test Highlight Surrounding Tiles
+            //        foreach (var keyTile in gameTileTracker.DestinationPathfindingMap.Keys)
+            //        {
+            //            GameTileFunctions.HighlightGameTile(keyTile, Color.cyan);
+            //        }
+            //        GameTileFunctions.HighlightGameTile(CurrentGameTile, Color.yellow);
+            //        gameTileTracker.HighlightedPath.Add(CurrentGameTile);
+            //    }
+            //    else
+            //    {
+            //        foreach (var mappedGameTile in gameTileTracker.DestinationPathfindingMap.Keys)
+            //        {
+            //            GameTileFunctions.UnhighlightGameTile(mappedGameTile);
+            //        }
+            //        gameTileTracker.DestinationPathfindingMap.Clear();
 
-            //Test Toggle Animation between Default and Idle
+            //        //TODO: Why do random tiles highlight after this?
+            //    }
+            //}
+            #endregion
+
+            #region Test Toggle Animation between Default and Idle
             //GameTile currentGameTileComponent = CurrentGameTile.GetComponent<GameTile>();
             //if (currentGameTileComponent != null && currentGameTileComponent.OccupyingCharacter != null)
             //{
@@ -84,13 +122,13 @@ public class GameTileCursorController : MonoBehaviour
             //    //CharacterFunctions.ChangeAnimationState("Default", cData);
             //    CharacterFunctions.ChangeAnimationState("Idle", cData);
             //}
-            //-Test Toggle Animation between Default and Idle
+            #endregion
         }
 
         //Right Click
         if (Input.GetMouseButtonDown(1))
         {
-            //Test Rotate
+            #region Test Rotate
             GameTile currentGameTileComponent = CurrentGameTile.GetComponent<GameTile>();
             if (currentGameTileComponent != null && currentGameTileComponent.OccupyingCharacter != null)
             {
@@ -101,7 +139,7 @@ public class GameTileCursorController : MonoBehaviour
                 else
                     CharacterFunctions.ChangeOrientation(cData.DirectionFaced+1, cData);
             }
-            //-Test Rotate
+            #endregion
         }
 
         //Mouse Wheel Scrolled
