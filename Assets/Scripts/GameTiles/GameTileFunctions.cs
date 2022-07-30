@@ -63,14 +63,14 @@ public static class GameTileFunctions
     /// <summary>
     /// Movement for non-flying/non-teleporting units
     /// </summary>
-    /// <param name="GameTileDictionary"></param>
-    /// <param name="OriginGameTile"></param>
-    /// <param name="MaxDistance"></param>
-    /// <param name="MaxJumpHeight"></param>
+    /// <param name="GameTileDictionary">GameTileTracker element for referencing game objects from their grid coordinates</param>
+    /// <param name="OriginGameTile">Starting game tile for movement</param>
+    /// <param name="MaxDistance">Distance from origin tile that can be traversed</param>
+    /// <param name="MaxJumpHeight">Game Tile Height maximum that can be jumped up or down</param>
     /// <param name="MaxLeapWidth">Number of tiles that can be leapt over at once</param>
-    /// <param name="BypassEnemy"></param>
-    /// <param name="AvoidWater"></param>
-    /// <returns>Return all tiles with each tile paired to preceding one for movement controller via Dictionary
+    /// <param name="BypassEnemy">Whether or not to treat opposing units as physical blockers</param>
+    /// <param name="AvoidWater">Whether or not to treat water tiles as inaccessible</param>
+    /// <returns>Return all tiles that can be reached with each tile paired to preceding one for movement controller via Dictionary
     /// NOTE: this includes game tiles that are occupied by allies, such as the origin game tile. 
     /// Game tiles will still need to be validated against allied occupants while performing moves with this data.</returns>
     public static Dictionary<GameObject, GameObject> GetDestinationGameTiles(
@@ -186,7 +186,7 @@ public static class GameTileFunctions
                         }
                         else if (newDistance > 1)
                         {
-                            if (newHeightMax > originHeightMin)
+                            if (originHeightMax < newHeightMin)
                             {
                                 break; //Being too high for a horizontal jump means we can just exit early for this whole direction
                             }
@@ -266,5 +266,18 @@ public static class GameTileFunctions
         SpriteRenderer spriteRenderer = GameTileGameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.enabled = false;
         HighlightedRenderers.Remove(spriteRenderer);
+    }
+
+    /// <summary>
+    /// Unhightlight all game tile renderers the GameTileTracker renderers
+    /// </summary>
+    /// <param name="HighlightedRenderers">GameTileTracker element for managing game tile highlights</param>
+    public static void UnhighlightAllGameTiles(Dictionary<Renderer, Color> HighlightedRenderers)
+    {
+        foreach (Renderer spriteRenderer in HighlightedRenderers.Keys)
+        {
+            spriteRenderer.enabled = false;
+            HighlightedRenderers.Remove(spriteRenderer);
+        }
     }
 }
