@@ -77,7 +77,7 @@ public class GameTileCursorController : MonoBehaviour
             #region Test Highlight Surrounding Tiles
             GameTile currentGameTileComponent = CurrentGameTile.GetComponent<GameTile>();
             if (currentGameTileComponent != null && currentGameTileComponent.OccupyingCharacter != null
-                /*&& currentGameTileComponent.OccupyingCharacter.GetComponent<CharacterGameData>().CharacterActive*/)
+                && currentGameTileComponent.OccupyingCharacter.GetComponent<CharacterGameData>().CharacterActive)
             {
                 Debug.Log($"Character Found at X:{currentGameTileComponent.CellPositionX} " +
                     $"Y:{currentGameTileComponent.CellPositionY}, highlighting pathfinding returns");

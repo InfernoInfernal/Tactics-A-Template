@@ -55,6 +55,7 @@ MonoBehaviour:
   BackSpriteLibrary: {fileID: 7723695738988490283}
   Team: 0
   DirectionFaced: 0
+  CharacterActive: 0
   Movement: 0
   HorizontalJump: 0
   VerticalJump: 0
