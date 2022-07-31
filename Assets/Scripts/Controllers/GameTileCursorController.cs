@@ -44,27 +44,29 @@ public class GameTileCursorController : MonoBehaviour
 
             //Check to see if we moved to a new tile, and proceed with updating the cursor if so
             if (VisibleGameTile != null && VisibleGameTile != CurrentGameTile)
+            {
                 UpdateCurrentGameTileCursor(VisibleGameTile);
 
-            #region Test Highlight Path
-            //GameTileTracker gameTileTracker = GameObject.FindGameObjectWithTag(Constants.TilemapTag).GetComponent<GameTileTracker>();
-            //if (gameTileTracker.HighlightedPath.Count > 0 && gameTileTracker.DestinationPathfindingMap.ContainsKey(CurrentGameTile))
-            //{
-            //    foreach (GameObject highlightedPathGameTile in gameTileTracker.HighlightedPath) //HighlightedGameTile inherently flawed logic?
-            //    {
-            //        GameTileFunctions.HighlightGameTile(highlightedPathGameTile, Color.cyan);
-            //    }
-            //    gameTileTracker.HighlightedPath.Clear();
+                #region Test Highlight Path
+                GameTileTracker gameTileTracker = GameObject.FindGameObjectWithTag(Constants.TilemapTag).GetComponent<GameTileTracker>();
+                if (gameTileTracker.HighlightedPath.Count > 0 && gameTileTracker.DestinationPathfindingMap.ContainsKey(CurrentGameTile))
+                {
+                    foreach (GameObject highlightedPathGameTile in gameTileTracker.HighlightedPath) //HighlightedGameTile inherently flawed logic?
+                    {
+                        GameTileFunctions.HighlightGameTile(highlightedPathGameTile, Color.cyan);
+                    }
+                    gameTileTracker.HighlightedPath.Clear();
 
-            //    GameObject backtraceGameTile = CurrentGameTile;
-            //    while (backtraceGameTile != null)
-            //    {
-            //        GameTileFunctions.HighlightGameTile(backtraceGameTile, Color.yellow);
-            //        gameTileTracker.HighlightedPath.Add(backtraceGameTile);
-            //        backtraceGameTile = gameTileTracker.DestinationPathfindingMap[backtraceGameTile];
-            //    }
-            //}
-            #endregion
+                    GameObject backtraceGameTile = CurrentGameTile;
+                    while (backtraceGameTile != null)
+                    {
+                        GameTileFunctions.HighlightGameTile(backtraceGameTile, Color.yellow);
+                        gameTileTracker.HighlightedPath.Add(backtraceGameTile);
+                        backtraceGameTile = gameTileTracker.DestinationPathfindingMap[backtraceGameTile];
+                    }
+                }
+                #endregion
+            }
 
             //Lerp Camera chase to tile Tile?
         }
@@ -73,44 +75,43 @@ public class GameTileCursorController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             #region Test Highlight Surrounding Tiles
-            //GameTile currentGameTileComponent = CurrentGameTile.GetComponent<GameTile>();
-            //if (currentGameTileComponent != null && currentGameTileComponent.OccupyingCharacter != null 
-            //    /*&& currentGameTileComponent.OccupyingCharacter.GetComponent<CharacterGameData>().CharacterActive*/)
-            //{
-            //    Debug.Log($"Character Found at X:{currentGameTileComponent.CellPositionX} " +
-            //        $"Y:{currentGameTileComponent.CellPositionY}, highlighting pathfinding returns");
-            //    GameTileTracker gameTileTracker = GameObject.FindGameObjectWithTag(Constants.TilemapTag).GetComponent<GameTileTracker>();
-            //    if (gameTileTracker.DestinationPathfindingMap.Count == 0)
-            //    {
-            //        CharacterGameData currentCharacterGameData = currentGameTileComponent.OccupyingCharacter.GetComponent<CharacterGameData>();
+            GameTile currentGameTileComponent = CurrentGameTile.GetComponent<GameTile>();
+            if (currentGameTileComponent != null && currentGameTileComponent.OccupyingCharacter != null
+                /*&& currentGameTileComponent.OccupyingCharacter.GetComponent<CharacterGameData>().CharacterActive*/)
+            {
+                Debug.Log($"Character Found at X:{currentGameTileComponent.CellPositionX} " +
+                    $"Y:{currentGameTileComponent.CellPositionY}, highlighting pathfinding returns");
+                GameTileTracker gameTileTracker = GameObject.FindGameObjectWithTag(Constants.TilemapTag).GetComponent<GameTileTracker>();
+                if (gameTileTracker.DestinationPathfindingMap.Count == 0)
+                {
+                    CharacterGameData currentCharacterGameData = currentGameTileComponent.OccupyingCharacter.GetComponent<CharacterGameData>();
 
-            //        gameTileTracker.DestinationPathfindingMap = GameTileFunctions.GetDestinationGameTiles(
-            //            gameTileTracker.GameTileDictionary,
-            //            new Vector2Int(currentGameTileComponent.CellPositionX, currentGameTileComponent.CellPositionY),
-            //            currentCharacterGameData.Movement,
-            //            currentCharacterGameData.VerticalJump,
-            //            currentCharacterGameData.HorizontalJump,
-            //            false,
-            //            false);
+                    gameTileTracker.DestinationPathfindingMap = GameTileFunctions.GetDestinationGameTiles(
+                        gameTileTracker.GameTileDictionary,
+                        new Vector2Int(currentGameTileComponent.CellPositionX, currentGameTileComponent.CellPositionY),
+                        currentCharacterGameData.Movement,
+                        currentCharacterGameData.VerticalJump,
+                        currentCharacterGameData.HorizontalJump,
+                        false,
+                        false);
 
-            //        foreach (var keyTile in gameTileTracker.DestinationPathfindingMap.Keys)
-            //        {
-            //            GameTileFunctions.HighlightGameTile(keyTile, Color.cyan);
-            //        }
-            //        GameTileFunctions.HighlightGameTile(CurrentGameTile, Color.yellow);
-            //        gameTileTracker.HighlightedPath.Add(CurrentGameTile);
-            //    }
-            //    else
-            //    {
-            //        foreach (var mappedGameTile in gameTileTracker.DestinationPathfindingMap.Keys)
-            //        {
-            //            GameTileFunctions.UnhighlightGameTile(mappedGameTile);
-            //        }
-            //        gameTileTracker.DestinationPathfindingMap.Clear();
-
-            //        //TODO: Why do random tiles highlight after this?
-            //    }
-            //}
+                    foreach (var keyTile in gameTileTracker.DestinationPathfindingMap.Keys)
+                    {
+                        GameTileFunctions.HighlightGameTile(keyTile, Color.cyan);
+                    }
+                    GameTileFunctions.HighlightGameTile(CurrentGameTile, Color.yellow);
+                    gameTileTracker.HighlightedPath.Add(CurrentGameTile);
+                }
+                else
+                {
+                    foreach (var mappedGameTile in gameTileTracker.DestinationPathfindingMap.Keys)
+                    {
+                        GameTileFunctions.UnhighlightGameTile(mappedGameTile);
+                    }
+                    gameTileTracker.DestinationPathfindingMap.Clear();
+                    gameTileTracker.HighlightedPath.Clear();
+                }
+            }
             #endregion
 
             #region Test Toggle Animation between Default and Idle
