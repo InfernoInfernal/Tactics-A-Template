@@ -59,7 +59,7 @@ public static class GameTileFunctions
     //You CAN leap over opposing units horizontally if you pad enough spaces (3 units) over their sprite pivot to clear the whole sprite
     //Water is treated the same as solid tiles for movement/jumping
     //Water can be treated as an inaccessible tile with AvoidWater set to true
-    //Movement cost is calculated from the tile you are leaving, NOT entering, and when leaping is the cost for every tile leapt over too
+    //Movement cost is calculated from the tile you are leaving, NOT entering, and when leaping overrides the cost for every tile leapt over
 
     /// <summary>
     /// Movement for non-flying/non-teleporting units
