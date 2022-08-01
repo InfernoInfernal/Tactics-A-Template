@@ -68,14 +68,14 @@ public static class GameTileFunctions
     /// <param name="MaxDistance">Distance from origin tile that can be traversed</param>
     /// <param name="MaxJumpHeight">Game Tile Height maximum that can be jumped up or down</param>
     /// <param name="MaxLeapWidth">Number of tiles that can be leapt over at once</param>
-    /// <param name="BypassEnemy">Whether or not to treat opposing units as physical blockers</param>
+    /// <param name="BypassOpposingUnits">Whether or not to treat opposing units as physical blockers</param>
     /// <param name="AvoidWater">Whether or not to treat water tiles as inaccessible</param>
     /// <returns>Return all tiles that can be reached with each tile paired to preceding one for movement controller via Dictionary
     /// NOTE: this includes game tiles that are occupied by allies, such as the origin game tile. 
     /// Game tiles will still need to be validated against allied occupants while performing moves with this data.</returns>
     public static Dictionary<GameObject, GameObject> GetDestinationGameTiles(
         Dictionary<Vector2Int, GameObject> GameTileDictionary, Vector2Int OriginGameTile, int MaxDistance,
-        int MaxJumpHeight, int MaxLeapWidth, bool BypassEnemy = false, bool AvoidWater = false)
+        int MaxJumpHeight, int MaxLeapWidth, bool BypassOpposingUnits = false, bool AvoidWater = false)
     {
         //Dictionary of finalized selections
         Dictionary<GameObject, GameObject> finalizedDestinations = new Dictionary<GameObject, GameObject>();
@@ -137,10 +137,12 @@ public static class GameTileFunctions
                         if (!GameTileDictionary.ContainsKey(newCoordinates)) //Verify has an actual game tile or we can just skip over
                             continue;
                         GameTile newGameTileComponent = GameTileDictionary[newCoordinates].GetComponent<GameTile>();
+                        int newHeightMax = newGameTileComponent.CellPositionZ + newGameTileComponent.GameTileSpriteHeightMaximum;
+                        int newHeightMin = newGameTileComponent.CellPositionZ + newGameTileComponent.GameTileSpriteHeightMinimum;
 
                         //Determine if the tile is blocked by an opposing team and we're not bypassing
                         bool opposedCharacterBlocking = false;
-                        if (!BypassEnemy && newGameTileComponent.OccupyingCharacter != null)
+                        if (!BypassOpposingUnits && newGameTileComponent.OccupyingCharacter != null)
                         {
                             CharacterTeam occupiedCharacterTeam =
                                 GameTileDictionary[OriginGameTile].GetComponent<GameTile>().OccupyingCharacter.GetComponent<CharacterGameData>().Team;
@@ -149,26 +151,17 @@ public static class GameTileFunctions
                                 (occupiedCharacterTeam == CharacterTeam.Enemy && originCharacterTeam != CharacterTeam.Enemy))
                             {
                                 opposedCharacterBlocking = true;
+                                //If there is an opposer in a tile to be jumped over (not bypassing), treat it as higher for purposes of jumping over
+                                newHeightMax += Constants.CharacterSpriteGameHeight;
+                                newHeightMin += Constants.CharacterSpriteGameHeight;
                             }
                         }
 
-                        //If there is an opposer in a tile to be jumped over (and not bypassing), treat it as 3 higher for purposes of jumping over
-                        //Cannot walk through blocked tile, but might be able to jump over
-                        //If jumping, ensure valid tile height for jumping over (even for the first tile) or no point in proceeding in this direction
-
                         bool jumpBeyondInvalid = false;
-
-                        int newHeightMax = newGameTileComponent.CellPositionZ + newGameTileComponent.GameTileSpriteHeightMaximum;
-                        int newHeightMin = newGameTileComponent.CellPositionZ + newGameTileComponent.GameTileSpriteHeightMinimum;
-
-                        if (opposedCharacterBlocking) //Padding for jumping over
-                        {
-                            newHeightMax += 3;
-                            newHeightMin += 3;
-                        }
-                        
                         if (newDistance == 1)
                         {
+                            //For jumping, need to ensure valid tile height for jumping over (even for the first tile)
+                            //otherwise no point in proceeding in this direction
                             if (newHeightMax > originHeightMin)
                             {
                                 jumpBeyondInvalid = true; //We can't jump over but still need to evaluate this tile for walkability

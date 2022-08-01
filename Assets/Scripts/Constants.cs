@@ -17,4 +17,11 @@ public static class Constants
     /// The number of pixels in a tile single height unit
     /// </summary>
     public static readonly int PixelPerGameUnitHeight = 8;
+
+    /// <summary>
+    /// The number of game units a characteer sprite is treated as being
+    /// This determines how many game units an occupied tile is treated as higher
+    /// when calculating if an opposing unit can leap over it
+    /// </summary>
+    public static readonly int CharacterSpriteGameHeight = 3;
 }
