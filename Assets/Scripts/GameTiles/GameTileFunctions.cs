@@ -159,46 +159,30 @@ public static class GameTileFunctions
                         }
 
                         bool jumpBeyondInvalid = false;
-                        if (newDistance == 1)
+                        //If higher than the starting tile AT ANY POINT in a horiztonal leap, leaping further is impossible
+                        if (originHeightMax < newHeightMin)
                         {
-                            //For jumping, need to ensure valid tile height for jumping over (even for the first tile)
-                            //otherwise no point in proceeding in this direction
-                            if (newHeightMax > originHeightMin)
+                            if (newDistance > 1                                     //Can't leap upwards
+                                || originHeightMax + MaxJumpHeight < newHeightMin)  //Too high for vertical jumping
                             {
-                                jumpBeyondInvalid = true; //We can't jump over but still need to evaluate this tile for walkability
-
-                                if (opposedCharacterBlocking)
-                                    break; //If we can't jump over OR land in the tile, exit this direction
-
-                                if (originHeightMax + MaxJumpHeight < newHeightMin)
-                                    break; //If too high to jump and can't go over, exit this direction
-                            }
-                            else if (opposedCharacterBlocking)
-                            {
-                                continue; //If we can't land in the tile but can still jump over, skip to next
-                            }
-                        }
-                        else if (newDistance > 1)
-                        {
-                            if (originHeightMax < newHeightMin)
-                            {
-                                break; //Being too high for a horizontal jump means we can just exit early for this whole direction
+                                break;
                             }
 
-                            if (opposedCharacterBlocking)
-                            {
-                                continue; //We can jump over the tile but can't land in it, skip to next
-                            }
+                            //Due to invalid tile height for leaping horizontally, end direction expansion after this first tile
+                            jumpBeyondInvalid = true;
                         }
 
                         //Additional validation checks
                         if (finalizedDestinations.ContainsKey(GameTileDictionary[newCoordinates])   //Destination already finalized
                             || newGameTileComponent.Inaccessible                                    //Not accessible
                             || (AvoidWater && newGameTileComponent.Water)                           //Can't swim
-                            || (originHeightMin - MaxJumpHeight > newHeightMax)                     //Too low to jump down to
-                            )
+                            || opposedCharacterBlocking                                             //Blocked by opposing
+                            || (originHeightMin - MaxJumpHeight > newHeightMax))                    //Too low to jump down to
                         {
-                            continue;
+                            if (jumpBeyondInvalid)
+                                break;
+                            else
+                                continue;
                         }
 
                         //Upon passing all validation, add the new tile to the frontier for future exploration
