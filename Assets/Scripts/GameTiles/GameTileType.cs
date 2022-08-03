@@ -31,9 +31,8 @@ public class GameTileType : ScriptableObject
     public Sprite GameTileHighlight;
 
     [Space(10)]
-    public int GameTileSpriteHeightMaximum; //Game unit height from tile bottom - needed for jump and move calculations
-    public int GameTileSpriteHeightMinimum; //For flat tiles, same as Maximum. For inclined, game height
-                                          //from the lowest point of the slant to the tile's bottom
+    public int InclineGameHeight; //Game height for inclined tiles, 0 if flat
+                                  //subtracted from Z to get the lowest point of the incline (highest is Z itself)
     public int MovementCost = 1; //Cost to walk to the tile from an adjacent one using normal movement
     public TileSurfaceOrientation SurfaceOrientation; //The default orientation of the tile's incline, if any
     public TileInclineRise InclineRise; //The rise of the tile's incline, if any

@@ -109,8 +109,8 @@ public static class GameTileFunctions
                 //Loop through distance for each direction for walking/jumping
                 GameTile currentGameTileComponent = GameTileDictionary[travelPair.Key].GetComponent<GameTile>();
                 int moveCost = currentGameTileComponent.MovementCost;
-                int originHeightMax = currentGameTileComponent.CellPositionZ + currentGameTileComponent.GameTileSpriteHeightMaximum;
-                int originHeightMin = currentGameTileComponent.CellPositionZ + currentGameTileComponent.GameTileSpriteHeightMinimum;
+                int originHeightMax = currentGameTileComponent.CellPositionZ;
+                int originHeightMin = currentGameTileComponent.CellPositionZ - currentGameTileComponent.InclineGameHeight;
                 for (int direction = 0; direction < 4; direction++)
                 {
                     for (int newDistance = 1; newDistance < MaxLeapWidth + 1; newDistance++)
@@ -138,8 +138,8 @@ public static class GameTileFunctions
                         if (!GameTileDictionary.ContainsKey(newCoordinates)) //Verify has an actual game tile or we can just skip over
                             continue;
                         GameTile newGameTileComponent = GameTileDictionary[newCoordinates].GetComponent<GameTile>();
-                        int newHeightMax = newGameTileComponent.CellPositionZ + newGameTileComponent.GameTileSpriteHeightMaximum;
-                        int newHeightMin = newGameTileComponent.CellPositionZ + newGameTileComponent.GameTileSpriteHeightMinimum;
+                        int newHeightMax = newGameTileComponent.CellPositionZ;
+                        int newHeightMin = newGameTileComponent.CellPositionZ - newGameTileComponent.InclineGameHeight;
 
                         //Determine if the tile is blocked by an opposing team and we're not bypassing
                         bool opposedCharacterBlocking = false;
@@ -160,7 +160,7 @@ public static class GameTileFunctions
 
                         bool jumpBeyondInvalid = false;
                         //If higher than the starting tile AT ANY POINT in a horiztonal leap, leaping further is impossible
-                        if (originHeightMax < newHeightMin)
+                        if (originHeightMin < newHeightMax)
                         {
                             if (newDistance > 1                                     //Can't leap upwards
                                 || originHeightMax + MaxJumpHeight < newHeightMin)  //Too high for vertical jumping

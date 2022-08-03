@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameTileBase: {fileID: 11400000, guid: 466d84e2d19e6cb44895935eb049860f, type: 2}
   GameTileHighlight: {fileID: 21300000, guid: ed4f3ec3ab5566d4f8c0d935b6ffb8bb, type: 3}
-  GameTileSpriteHeightMaximum: 1
-  GameTileSpriteHeightMinimum: 0
+  InclineGameHeight: 1
   MovementCost: 1
   SurfaceOrientation: 1
   InclineRise: 1
   Inaccessible: 0
-  Liquid: 0
+  Water: 0
