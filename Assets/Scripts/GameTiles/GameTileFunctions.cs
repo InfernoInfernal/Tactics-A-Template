@@ -86,7 +86,7 @@ public static class GameTileFunctions
 
         //frontiers breakdown:
         //List Index = Total Movement Cost for destinations from first origin
-        //Dictionary.Key = Destination, Dictionary.Value = previous backtrace Origin
+        //Dictionary.Key = Destination, Dictionary.Value = previous Origin in recursive movement
         List<Dictionary<Vector2Int, Vector2Int>> frontiers = new List<Dictionary<Vector2Int, Vector2Int>>();
 
         for (int i = 0; i <= MaxDistance; i++) //Initialize frontier entries up to possible distance
