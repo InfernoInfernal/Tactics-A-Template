@@ -67,7 +67,7 @@ public static class GameTileFunctions
     /// <param name="GameTileDictionary">GameTileTracker element for referencing game objects from their grid coordinates</param>
     /// <param name="OriginGameTile">Starting game tile for movement</param>
     /// <param name="MaxDistance">Distance from origin tile that can be traversed</param>
-    /// <param name="MaxJumpHeight">Game Tile Height maximum that can be jumped up or down</param>
+    /// <param name="MaxJumpHeight">Game Tile Height maximum difference that can be jumped up or down</param>
     /// <param name="MaxLeapWidth">Number of tiles that can be leapt over at once</param>
     /// <param name="BypassOpposingUnits">Whether or not to treat opposing units as physical blockers</param>
     /// <param name="AvoidWater">Whether or not to treat water tiles as inaccessible</param>
@@ -113,7 +113,7 @@ public static class GameTileFunctions
                 int originHeightMin = currentGameTileComponent.CellPositionZ - currentGameTileComponent.InclineGameHeight;
                 for (int direction = 0; direction < 4; direction++)
                 {
-                    for (int newDistance = 1; newDistance < MaxLeapWidth + 1; newDistance++)
+                    for (int newDistance = 1; newDistance < MaxLeapWidth + 2; newDistance++)
                     {
                         //if maxDistance is exceeded, no need for further searching in this direction
                         if (currentDistance + (newDistance * moveCost) > MaxDistance)
