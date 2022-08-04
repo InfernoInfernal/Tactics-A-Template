@@ -51,7 +51,7 @@ public class CharacterGameData : MonoBehaviour
     //Number of Game Tiles that can be traversed in one move
     public int Movement;
     //Number of game height units that can be jumped up
-    public int HorizontalJump;
-    //Number of game tiles that can be jumped across
     public int VerticalJump;
+    //Number of game tiles that can be leapt across
+    public int HorizontalLeap;
 }

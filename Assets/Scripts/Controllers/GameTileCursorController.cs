@@ -51,18 +51,18 @@ public class GameTileCursorController : MonoBehaviour
                 GameTileTracker gameTileTracker = GameObject.FindGameObjectWithTag(Constants.TilemapTag).GetComponent<GameTileTracker>();
                 if (gameTileTracker.HighlightedPath.Count > 0 && gameTileTracker.DestinationPathfindingMap.ContainsKey(CurrentGameTile))
                 {
-                    foreach (GameObject highlightedPathGameTile in gameTileTracker.HighlightedPath) //HighlightedGameTile inherently flawed logic?
+                    foreach (GameObject highlightedPathGameTile in gameTileTracker.HighlightedPath)
                     {
                         GameTileFunctions.HighlightGameTile(highlightedPathGameTile, Color.cyan);
                     }
                     gameTileTracker.HighlightedPath.Clear();
 
-                    GameObject backtraceGameTile = CurrentGameTile;
-                    while (backtraceGameTile != null)
+                    GameObject recursiveGameTile = CurrentGameTile;
+                    while (recursiveGameTile != null) //for (maxDistance ||) instead? infinite loop possibility bad practice
                     {
-                        GameTileFunctions.HighlightGameTile(backtraceGameTile, Color.yellow);
-                        gameTileTracker.HighlightedPath.Add(backtraceGameTile);
-                        backtraceGameTile = gameTileTracker.DestinationPathfindingMap[backtraceGameTile];
+                        GameTileFunctions.HighlightGameTile(recursiveGameTile, Color.yellow);
+                        gameTileTracker.HighlightedPath.Add(recursiveGameTile);
+                        recursiveGameTile = gameTileTracker.DestinationPathfindingMap[recursiveGameTile];
                     }
                 }
                 #endregion
@@ -91,7 +91,7 @@ public class GameTileCursorController : MonoBehaviour
                         new Vector2Int(currentGameTileComponent.CellPositionX, currentGameTileComponent.CellPositionY),
                         currentCharacterGameData.Movement,
                         currentCharacterGameData.VerticalJump,
-                        currentCharacterGameData.HorizontalJump,
+                        currentCharacterGameData.HorizontalLeap,
                         false,
                         false);
 

@@ -3647,11 +3647,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7829461938897520783, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
       propertyPath: VerticalJump
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7829461938897520783, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
       propertyPath: HorizontalJump
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7829461938897520783, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
+      propertyPath: HorizontalLeap
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7829461938897520783, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
       propertyPath: CharacterActive
@@ -4820,11 +4824,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7829461938897520783, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
       propertyPath: VerticalJump
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7829461938897520783, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
       propertyPath: HorizontalJump
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7829461938897520783, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
+      propertyPath: HorizontalLeap
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7829461938897520783, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
       propertyPath: CharacterActive
@@ -7619,6 +7627,10 @@ PrefabInstance:
     - target: {fileID: 7829461938897520783, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
       propertyPath: HorizontalJump
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7829461938897520783, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
+      propertyPath: HorizontalLeap
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7829461938897520783, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
       propertyPath: CharacterActive
