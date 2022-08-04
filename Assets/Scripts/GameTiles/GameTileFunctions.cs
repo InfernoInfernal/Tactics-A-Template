@@ -145,8 +145,7 @@ public static class GameTileFunctions
                         bool opposedCharacterBlocking = false;
                         if (!BypassOpposingUnits && newGameTileComponent.OccupyingCharacter != null)
                         {
-                            CharacterTeam occupiedCharacterTeam =
-                                GameTileDictionary[OriginGameTile].GetComponent<GameTile>().OccupyingCharacter.GetComponent<CharacterGameData>().Team;
+                            CharacterTeam occupiedCharacterTeam = newGameTileComponent.OccupyingCharacter.GetComponent<CharacterGameData>().Team;
 
                             if ((occupiedCharacterTeam != CharacterTeam.Enemy && originCharacterTeam == CharacterTeam.Enemy) ||
                                 (occupiedCharacterTeam == CharacterTeam.Enemy && originCharacterTeam != CharacterTeam.Enemy))
