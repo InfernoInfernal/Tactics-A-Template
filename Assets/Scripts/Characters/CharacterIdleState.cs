@@ -6,6 +6,7 @@ public class CharacterIdleState : CharacterBaseState
     public override void Start(CharacterStateManager StateManager)
     {
         CharacterFunctions.ChangeAnimationState(Constants.Idle, StateManager.CharacterData);
+        StateManager.CharacterData.AnimatorState = Constants.Idle;
         //Delay animation movement start
         //Parent to the State Manager, as coroutines can't be started outside Monobehaviour
         //StateManager.StartCoroutine(DelayIdleAnimation(StateManager.CharacterData));

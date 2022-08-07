@@ -45,6 +45,9 @@ public class CharacterGameData : MonoBehaviour
     //Character Direction
     public CharacterDirectionFacing DirectionFaced;
 
+    //Character Animator's Current State
+    public string AnimatorState = Constants.Idle;
+
     //State to determine whether the character can act during this turn/action
     public bool CharacterActive = false;
 

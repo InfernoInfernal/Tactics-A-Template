@@ -10,7 +10,6 @@ public class CharacterStateManager : MonoBehaviour
     public CharacterGameData CharacterData;
 
     CharacterBaseState CharacterState;
-    [HideInInspector]
     public CharacterIdleState Idle = new CharacterIdleState();
 
     void Start()
@@ -20,6 +19,8 @@ public class CharacterStateManager : MonoBehaviour
         CharacterData = this.gameObject.GetComponent<CharacterGameData>();
         if (CharacterData == null)
             Debug.LogError("No paired CharacterGameData attached to GameObject!");
+        else
+            CharacterData.AnimatorState = Constants.Idle;
 
         CharacterState.Start(this);
     }
