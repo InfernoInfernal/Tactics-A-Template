@@ -11,6 +11,11 @@ public class CharacterStateManager : MonoBehaviour
 
     CharacterBaseState CharacterState;
     public CharacterIdleState Idle = new CharacterIdleState();
+    public CharacterWalkState Walk = new CharacterWalkState();
+
+    //Used for movement reference in states
+    public Vector2Int moveOrigin;
+    public Vector2Int moveDestination;
 
     void Start()
     {
