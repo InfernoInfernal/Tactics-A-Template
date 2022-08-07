@@ -24,4 +24,24 @@ public static class Constants
     /// when calculating if an opposing unit can leap over it
     /// </summary>
     public static readonly int CharacterSpriteGameHeight = 3;
+
+    /// <summary>
+    /// Animation Trigger for the Character Default Animation
+    /// </summary>
+    public static readonly string Default = "Default";
+
+    /// <summary>
+    /// Animation Trigger for the Character Idle Animation
+    /// </summary>
+    public static readonly string Idle = "Idle";
+
+    /// <summary>
+    /// Animation Trigger for the Character Crouch Animation
+    /// </summary>
+    public static readonly string Crouch = "Crouch";
+
+    /// <summary>
+    /// Animation Trigger for the Character Jump Animation
+    /// </summary>
+    public static readonly string Jump = "Jump";
 }

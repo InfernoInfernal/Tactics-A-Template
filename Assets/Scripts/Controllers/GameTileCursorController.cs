@@ -49,11 +49,15 @@ public class GameTileCursorController : MonoBehaviour
 
                 #region Test Highlight Path
                 GameTileTracker gameTileTracker = GameObject.FindGameObjectWithTag(Constants.TilemapTag).GetComponent<GameTileTracker>();
-                if (gameTileTracker.HighlightedPath.Count > 0 && gameTileTracker.DestinationPathfindingMap.ContainsKey(CurrentGameTile))
+                if (gameTileTracker.HighlightedPath.Count > 0 && gameTileTracker.DestinationPathfindingMap.ContainsKey(CurrentGameTile)
+                    && CurrentGameTile.GetComponent<GameTile>().OccupyingCharacter == null)
                 {
                     foreach (GameObject highlightedPathGameTile in gameTileTracker.HighlightedPath)
                     {
-                        GameTileFunctions.HighlightGameTile(highlightedPathGameTile, Color.cyan);
+                        if (highlightedPathGameTile.GetComponent<GameTile>().OccupyingCharacter == null)
+                            GameTileFunctions.HighlightGameTile(highlightedPathGameTile, Color.cyan);
+                        else
+                            GameTileFunctions.UnhighlightGameTile(highlightedPathGameTile);
                     }
                     gameTileTracker.HighlightedPath.Clear();
 
@@ -95,16 +99,17 @@ public class GameTileCursorController : MonoBehaviour
                         false,
                         false);
 
-                    foreach (var keyTile in gameTileTracker.DestinationPathfindingMap.Keys)
+                    foreach (GameObject keyTile in gameTileTracker.DestinationPathfindingMap.Keys)
                     {
-                        GameTileFunctions.HighlightGameTile(keyTile, Color.cyan);
+                        if (keyTile.GetComponent<GameTile>().OccupyingCharacter == null)
+                            GameTileFunctions.HighlightGameTile(keyTile, Color.cyan);
                     }
                     GameTileFunctions.HighlightGameTile(CurrentGameTile, Color.yellow);
                     gameTileTracker.HighlightedPath.Add(CurrentGameTile);
                 }
                 else
                 {
-                    foreach (var mappedGameTile in gameTileTracker.DestinationPathfindingMap.Keys)
+                    foreach (GameObject mappedGameTile in gameTileTracker.DestinationPathfindingMap.Keys)
                     {
                         GameTileFunctions.UnhighlightGameTile(mappedGameTile);
                     }
@@ -120,8 +125,8 @@ public class GameTileCursorController : MonoBehaviour
             //{
             //    Debug.Log("Character Found, toggling animation");
             //    CharacterGameData cData = currentGameTileComponent.OccupyingCharacter.GetComponent<CharacterGameData>();
-            //    //CharacterFunctions.ChangeAnimationState("Default", cData);
-            //    CharacterFunctions.ChangeAnimationState("Idle", cData);
+            //    //CharacterFunctions.ChangeAnimationState(Constants.Default, cData);
+            //    CharacterFunctions.ChangeAnimationState(Constants.Idle, cData);
             //}
             #endregion
         }
