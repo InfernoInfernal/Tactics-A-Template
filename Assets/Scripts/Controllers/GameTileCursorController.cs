@@ -62,12 +62,23 @@ public class GameTileCursorController : MonoBehaviour
                     gameTileTracker.HighlightedPath.Clear();
 
                     GameObject recursiveGameTile = CurrentGameTile;
-                    while (recursiveGameTile != null) //for (maxDistance ||) instead? infinite loop possibility bad practice
+                    for (int i = 0; i < gameTileTracker.DestinationPathfindingMap.Count; i++) //Emergency Breaker
                     {
                         GameTileFunctions.HighlightGameTile(recursiveGameTile, Color.yellow);
                         gameTileTracker.HighlightedPath.Add(recursiveGameTile);
+                        if (gameTileTracker.DestinationPathfindingMap[recursiveGameTile] == null)
+                            break;
+
                         recursiveGameTile = gameTileTracker.DestinationPathfindingMap[recursiveGameTile];
                     }
+
+                    //Orient towards new destination
+                    GameTile destination = CurrentGameTile.GetComponent<GameTile>();
+                    GameTile origin = recursiveGameTile.GetComponent<GameTile>();
+                    CharacterFunctions.ChangeOrientation(CharacterFunctions.DetermineOrientation(
+                        new Vector2Int(destination.CellPositionX, destination.CellPositionY),
+                        new Vector2Int(origin.CellPositionX, origin.CellPositionY)),
+                        origin.OccupyingCharacter.GetComponent<CharacterGameData>());
                 }
                 #endregion
             }

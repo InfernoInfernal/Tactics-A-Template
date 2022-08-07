@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -51,5 +52,35 @@ public static class CharacterFunctions
         }
 
         characterGameData.DirectionFaced = newOrientation;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="originCoordinates"></param>
+    /// <param name="destinationCoordinates"></param>
+    /// <returns></returns>
+    public static CharacterDirectionFacing DetermineOrientation(Vector2Int originCoordinates, Vector2Int destinationCoordinates)
+    {
+        //Prioritize Down or Left if tiles are exactly diagonal with early exit
+        if (destinationCoordinates.x - originCoordinates.x > 0 && Math.Abs(destinationCoordinates.x - originCoordinates.x)
+            >= Math.Abs(destinationCoordinates.y - originCoordinates.y))    //Down & Left
+        {
+            return CharacterDirectionFacing.FrontLeft;
+        }
+        else if (destinationCoordinates.y - originCoordinates.y > 0 && Math.Abs(destinationCoordinates.x - originCoordinates.x)
+            <= Math.Abs(destinationCoordinates.y - originCoordinates.y))    //Down & Right
+        {
+            return CharacterDirectionFacing.FrontRight;
+        }
+        else if (destinationCoordinates.y - originCoordinates.y < 0 && Math.Abs(destinationCoordinates.x - originCoordinates.x)
+            <= Math.Abs(destinationCoordinates.y - originCoordinates.y))    //Up & Left
+        {
+            return CharacterDirectionFacing.BackLeft;
+        }
+        else                                                                //Up & Right
+        {
+            return CharacterDirectionFacing.BackRight;
+        }
     }
 }
