@@ -55,11 +55,11 @@ public static class CharacterFunctions
     }
 
     /// <summary>
-    /// 
+    /// Orientation calculator based on the Vector2Int parameters of an origin and destination game tile
     /// </summary>
-    /// <param name="originCoordinates"></param>
-    /// <param name="destinationCoordinates"></param>
-    /// <returns></returns>
+    /// <param name="originCoordinates">Vector2Int coordinates where the character is</param>
+    /// <param name="destinationCoordinates">Vector2Int coordinates where the character is looking at</param>
+    /// <returns>CharacterDirectionFacing of the orientation towards the destination game tile</returns>
     public static CharacterDirectionFacing DetermineOrientation(Vector2Int originCoordinates, Vector2Int destinationCoordinates)
     {
         //Prioritize Down or Left if tiles are exactly diagonal with early exit
