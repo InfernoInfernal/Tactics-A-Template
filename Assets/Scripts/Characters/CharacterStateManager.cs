@@ -63,7 +63,7 @@ public class CharacterStateManager : MonoBehaviour
     /// <param name="DestinationGameTileObject"></param>
     public void StartMoveSequence(GameObject DestinationGameTileObject)
     {
-        //Iniatialize values
+        //Prepare Travel Waypoints
         GameObject TileToEnqueue = DestinationGameTileObject;
         for (int i = 0; i < CharacterData.Movement + 1; i++) //Maximum travel distance possible
         {
@@ -71,33 +71,31 @@ public class CharacterStateManager : MonoBehaviour
                 break;
             RemainingDestinationWaypoints.AddFirst(TileToEnqueue);
             TileToEnqueue = GameTileTracker.DestinationPathfindingMap[TileToEnqueue];
-        }
-
-        //TODO: Refactor this dequeue order to fit with MoveToNextWaypoint
-
-
-
-        if (RemainingDestinationWaypoints.Count == 1)
-        {
-            //Couple to new tile
-            gameObject.GetComponent<GameTile>().OccupyingCharacter = RemainingDestinationWaypoints.First.Value;
+            //if (i == CharacterData.Movement)
+            //    Debug.LogError("Character's movement exceeded when preparing travel waypoints!");
         }
 
         GameTile FirstOrigin = TileToEnqueue.GetComponent<GameTile>();
-        //Decouple from tile
+        //GameTile FirstDestination = RemainingDestinationWaypoints.First.Value.GetComponent<GameTile>();
+
+        //Recouple character from origin to destination game tile
         FirstOrigin.OccupyingCharacter = null;
+        DestinationGameTileObject.GetComponent<GameTile>().OccupyingCharacter = gameObject;
 
-        GameTile FirstDestination = RemainingDestinationWaypoints.First.Value.GetComponent<GameTile>();
+        //This will be moved into MoveOrigin when MoveToNextWaypoint runs
+        MoveDestination = new Vector2Int(FirstOrigin.CellPositionX, FirstOrigin.CellPositionY);
+        MoveToNextWaypoint();
 
-        MoveOrigin = new Vector2Int(FirstOrigin.CellPositionX, FirstOrigin.CellPositionY);
-        MoveDestination = new Vector2Int(FirstDestination.CellPositionX, FirstDestination.CellPositionY);
-        MoveDestinationPosition = RemainingDestinationWaypoints.First.Value.transform.position;
+        //MoveOrigin = new Vector2Int(FirstOrigin.CellPositionX, FirstOrigin.CellPositionY);
+        //MoveDestination = new Vector2Int(FirstDestination.CellPositionX, FirstDestination.CellPositionY);
+        //MoveDestinationPosition = RemainingDestinationWaypoints.First.Value.transform.position;
+
 
         //Remove first destination once set
-        RemainingDestinationWaypoints.RemoveFirst();
+        //RemainingDestinationWaypoints.RemoveFirst();
 
         //TODO: Determine move sequence between Walk/JumpUp/Leap
-        ChangeState(Walk);
+        //ChangeState(Walk);
     }
 
     /// <summary>
@@ -111,17 +109,11 @@ public class CharacterStateManager : MonoBehaviour
             ChangeState(Idle);
             return;
         }
-
-        if (RemainingDestinationWaypoints.Count == 1)
-        {
-            //Couple to new tile
-            gameObject.GetComponent<GameTile>().OccupyingCharacter = RemainingDestinationWaypoints.First.Value;
-        }
         
-        GameTile FirstDestination = RemainingDestinationWaypoints.First.Value.GetComponent<GameTile>();
+        GameTile NextDestination = RemainingDestinationWaypoints.First.Value.GetComponent<GameTile>();
 
         MoveOrigin = MoveDestination;
-        MoveDestination = new Vector2Int(FirstDestination.CellPositionX, FirstDestination.CellPositionY);
+        MoveDestination = new Vector2Int(NextDestination.CellPositionX, NextDestination.CellPositionY);
         MoveDestinationPosition = RemainingDestinationWaypoints.First.Value.transform.position;
 
         //Remove first destination once set

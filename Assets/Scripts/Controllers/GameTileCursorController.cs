@@ -145,17 +145,41 @@ public class GameTileCursorController : MonoBehaviour
         //Right Click
         if (Input.GetMouseButtonDown(1))
         {
-            #region Test Rotate
-            GameTile currentGameTileComponent = CurrentGameTile.GetComponent<GameTile>();
-            if (currentGameTileComponent != null && currentGameTileComponent.OccupyingCharacter != null)
+            #region Test Move
+            GameTileTracker gameTileTracker = GameObject.FindGameObjectWithTag(Constants.TilemapTag).GetComponent<GameTileTracker>();
+            if (gameTileTracker.HighlightedPath.Contains(CurrentGameTile)
+                && gameTileTracker.DestinationPathfindingMap[CurrentGameTile] != null)
+                //Tile is a destination other than origin, valid for move
             {
-                Debug.Log("Character Found, rotating");
-                CharacterGameData cData = currentGameTileComponent.OccupyingCharacter.GetComponent<CharacterGameData>();
-                if ((int)cData.DirectionFaced == 3)
-                    CharacterFunctions.ChangeOrientation(0, cData);
-                else
-                    CharacterFunctions.ChangeOrientation(cData.DirectionFaced+1, cData);
+                //Get Character Tile
+                GameObject recursiveGameTile = CurrentGameTile;
+                for (int i = 0; i < gameTileTracker.DestinationPathfindingMap.Count; i++) //Emergency Breaker
+                {
+                    GameTileFunctions.HighlightGameTile(recursiveGameTile, Color.yellow);
+                    gameTileTracker.HighlightedPath.Add(recursiveGameTile);
+                    if (gameTileTracker.DestinationPathfindingMap[recursiveGameTile] == null)
+                        break;
+
+                    recursiveGameTile = gameTileTracker.DestinationPathfindingMap[recursiveGameTile];
+                }
+
+                //Trigger Move
+                recursiveGameTile.GetComponent<GameTile>().OccupyingCharacter
+                    .GetComponent<CharacterStateManager>().StartMoveSequence(CurrentGameTile);
             }
+            #endregion
+
+            #region Test Rotate
+            //GameTile currentGameTileComponent = CurrentGameTile.GetComponent<GameTile>();
+            //if (currentGameTileComponent != null && currentGameTileComponent.OccupyingCharacter != null)
+            //{
+            //    Debug.Log("Character Found, rotating");
+            //    CharacterGameData cData = currentGameTileComponent.OccupyingCharacter.GetComponent<CharacterGameData>();
+            //    if ((int)cData.DirectionFaced == 3)
+            //        CharacterFunctions.ChangeOrientation(0, cData);
+            //    else
+            //        CharacterFunctions.ChangeOrientation(cData.DirectionFaced+1, cData);
+            //}
             #endregion
         }
 
