@@ -76,8 +76,8 @@ public class GameTileCursorController : MonoBehaviour
                     GameTile destination = CurrentGameTile.GetComponent<GameTile>();
                     GameTile origin = recursiveGameTile.GetComponent<GameTile>();
                     CharacterFunctions.ChangeOrientation(CharacterFunctions.DetermineOrientation(
-                        new Vector2Int(destination.CellPositionX, destination.CellPositionY),
-                        new Vector2Int(origin.CellPositionX, origin.CellPositionY)),
+                        new Vector2Int(origin.CellPositionX, origin.CellPositionY),
+                        new Vector2Int(destination.CellPositionX, destination.CellPositionY)),
                         origin.OccupyingCharacter.GetComponent<CharacterGameData>());
                 }
                 #endregion
