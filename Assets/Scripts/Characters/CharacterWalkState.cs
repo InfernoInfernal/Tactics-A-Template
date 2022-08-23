@@ -23,7 +23,7 @@ public class CharacterWalkState : CharacterBaseState
         float speed = 1f;
 
         //Walk towards destination
-        StateManager.gameObject.transform.position = Vector2.MoveTowards(StateManager.gameObject.transform.position,
+        StateManager.gameObject.transform.position = Vector3.MoveTowards(StateManager.gameObject.transform.position,
             StateManager.MoveDestinationPosition, speed * Time.deltaTime);
         //Notify when destination reached
         if (StateManager.gameObject.transform.position == StateManager.MoveDestinationPosition)

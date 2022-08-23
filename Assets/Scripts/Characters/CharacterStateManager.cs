@@ -114,7 +114,7 @@ public class CharacterStateManager : MonoBehaviour
 
         MoveOrigin = MoveDestination;
         MoveDestination = new Vector2Int(NextDestination.CellPositionX, NextDestination.CellPositionY);
-        MoveDestinationPosition = RemainingDestinationWaypoints.First.Value.transform.position;
+        MoveDestinationPosition = CharacterFunctions.GetCharacterPositionOnGameTile(RemainingDestinationWaypoints.First.Value);
 
         //Remove first destination once set
         RemainingDestinationWaypoints.RemoveFirst();

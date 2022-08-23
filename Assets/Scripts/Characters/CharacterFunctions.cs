@@ -83,4 +83,20 @@ public static class CharacterFunctions
             return CharacterDirectionFacing.BackRight;
         }
     }
+
+    /// <summary>
+    /// Gets the Vector3 position a character should be at to render correctly over a GameTile
+    /// </summary>
+    /// <param name="GameTile">Game Tile GameObject the character is to stand on</param>
+    /// <returns>The Vector3 Position for characters to the linked tile</returns>
+    public static Vector3 GetCharacterPositionOnGameTile(GameObject GameTile)
+    {
+        GameTile gameTileComponent = GameTile.GetComponent<GameTile>();
+
+        return new Vector3(
+            GameTile.transform.position.x,
+            GameTile.transform.position.y - ((float)gameTileComponent.InclineGameHeight / Constants.PixelPerGameUnitHeight),
+            GameTile.transform.position.z - ((float)gameTileComponent.InclineGameHeight / 2) + 0.25f);
+            //Pad Character object so it renders on top of the cursor and tile
+    }
 }
