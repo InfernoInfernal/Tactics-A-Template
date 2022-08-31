@@ -96,7 +96,7 @@ public static class CharacterFunctions
         return new Vector3(
             GameTile.transform.position.x,
             GameTile.transform.position.y - ((float)gameTileComponent.InclineGameHeight / Constants.PixelPerGameUnitHeight),
-            GameTile.transform.position.z - ((float)gameTileComponent.InclineGameHeight / 2) + 0.25f);
+            GameTile.transform.position.z - ((float)gameTileComponent.InclineGameHeight / 2) + 0.75f);
             //Pad Character object so it renders on top of the cursor and tile
     }
 }

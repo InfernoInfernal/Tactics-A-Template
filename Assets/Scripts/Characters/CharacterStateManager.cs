@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,6 +26,8 @@ public class CharacterStateManager : MonoBehaviour
     public Vector2Int MoveDestination;
     [HideInInspector]
     public Vector3 MoveDestinationPosition;
+    [HideInInspector]
+    public float DestinationZMultiplier;
     public LinkedList<GameObject> RemainingDestinationWaypoints = new LinkedList<GameObject>();
 
     void Start()
@@ -76,7 +79,6 @@ public class CharacterStateManager : MonoBehaviour
         }
 
         GameTile FirstOrigin = TileToEnqueue.GetComponent<GameTile>();
-        //GameTile FirstDestination = RemainingDestinationWaypoints.First.Value.GetComponent<GameTile>();
 
         //Recouple character from origin to destination game tile
         FirstOrigin.OccupyingCharacter = null;
@@ -85,17 +87,6 @@ public class CharacterStateManager : MonoBehaviour
         //This will be moved into MoveOrigin when MoveToNextWaypoint runs
         MoveDestination = new Vector2Int(FirstOrigin.CellPositionX, FirstOrigin.CellPositionY);
         MoveToNextWaypoint();
-
-        //MoveOrigin = new Vector2Int(FirstOrigin.CellPositionX, FirstOrigin.CellPositionY);
-        //MoveDestination = new Vector2Int(FirstDestination.CellPositionX, FirstDestination.CellPositionY);
-        //MoveDestinationPosition = RemainingDestinationWaypoints.First.Value.transform.position;
-
-
-        //Remove first destination once set
-        //RemainingDestinationWaypoints.RemoveFirst();
-
-        //TODO: Determine move sequence between Walk/JumpUp/Leap
-        //ChangeState(Walk);
     }
 
     /// <summary>
@@ -115,6 +106,7 @@ public class CharacterStateManager : MonoBehaviour
         MoveOrigin = MoveDestination;
         MoveDestination = new Vector2Int(NextDestination.CellPositionX, NextDestination.CellPositionY);
         MoveDestinationPosition = CharacterFunctions.GetCharacterPositionOnGameTile(RemainingDestinationWaypoints.First.Value);
+        DestinationZMultiplier = 1 + Math.Abs(gameObject.transform.position.z - MoveDestinationPosition.z);
 
         //Remove first destination once set
         RemainingDestinationWaypoints.RemoveFirst();

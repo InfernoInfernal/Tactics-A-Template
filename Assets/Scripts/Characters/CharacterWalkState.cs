@@ -24,7 +24,7 @@ public class CharacterWalkState : CharacterBaseState
 
         //Walk towards destination
         StateManager.gameObject.transform.position = Vector3.MoveTowards(StateManager.gameObject.transform.position,
-            StateManager.MoveDestinationPosition, speed * Time.deltaTime);
+            StateManager.MoveDestinationPosition, speed * Time.deltaTime * StateManager.DestinationZMultiplier);
         //Notify when destination reached
         if (StateManager.gameObject.transform.position == StateManager.MoveDestinationPosition)
             StateManager.MoveToNextWaypoint();
