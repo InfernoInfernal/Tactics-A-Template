@@ -19,12 +19,10 @@ public class CharacterWalkState : CharacterBaseState
 
     public override void Update(CharacterStateManager StateManager)
     {
-        //TODO: Figure out better place where to set this?
-        float speed = 1f;
-
         //Walk towards destination
         StateManager.gameObject.transform.position = Vector3.MoveTowards(StateManager.gameObject.transform.position,
-            StateManager.MoveDestinationPosition, speed * Time.deltaTime * StateManager.DestinationZMultiplier);
+            StateManager.MoveDestinationPosition, Constants.AnimationTravelSpeed * Time.deltaTime * StateManager.DestinationZMultiplier);
+        
         //Notify when destination reached
         if (StateManager.gameObject.transform.position == StateManager.MoveDestinationPosition)
             StateManager.MoveToNextWaypoint();

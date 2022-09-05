@@ -51,9 +51,9 @@ public class CharacterStateManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Called to alter the Character State and start its sequence
     /// </summary>
-    /// <param name="NewState"></param>
+    /// <param name="NewState">The new character state for the manager to enter</param>
     public void ChangeState(CharacterBaseState NewState)
     {
         CharacterState = NewState;
@@ -63,7 +63,7 @@ public class CharacterStateManager : MonoBehaviour
     /// <summary>
     /// First call to state manager to make a unit move to a destination from where it is currently
     /// </summary>
-    /// <param name="DestinationGameTileObject"></param>
+    /// <param name="DestinationGameTileObject">The game tile that needs to be reached</param>
     public void StartMoveSequence(GameObject DestinationGameTileObject)
     {
         //Prepare Travel Waypoints
@@ -90,7 +90,7 @@ public class CharacterStateManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Determine the next state needed for the next waypoint and change to it, and refreshes the relevant variables
     /// </summary>
     public void MoveToNextWaypoint()
     {

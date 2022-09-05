@@ -26,6 +26,12 @@ public static class Constants
     public static readonly int CharacterSpriteGameHeight = 3;
 
     /// <summary>
+    /// The speed multiplied by deltaTime to determine how quickly a character
+    /// will move between different game tiles during movement character states
+    /// </summary>
+    public static readonly float AnimationTravelSpeed = 1f;
+
+    /// <summary>
     /// Animation Trigger for the Character Default Animation
     /// </summary>
     public static readonly string Default = "Default";
