@@ -1,6 +1,16 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+public enum JumpStage
+{
+    DoNothing,
+    Leap,
+    JumpUp,
+    FallDown,
+    Finished
+}
 
 /// <summary>
 /// Manager Class of the State Machine for Characters
@@ -29,6 +39,9 @@ public class CharacterStateManager : MonoBehaviour
     [HideInInspector]
     public float DestinationZMultiplier;
     public LinkedList<GameObject> RemainingDestinationWaypoints = new LinkedList<GameObject>();
+
+    [HideInInspector]
+    public JumpStage AnimationJumpStage = JumpStage.DoNothing;
 
     void Start()
     {
@@ -113,5 +126,15 @@ public class CharacterStateManager : MonoBehaviour
 
         //TODO: Determine move sequence between Walk/JumpUp/Leap
         ChangeState(Walk);
+    }
+
+    internal class StartCoroutine
+    {
+        private IEnumerator enumerator;
+
+        public StartCoroutine(IEnumerator enumerator)
+        {
+            this.enumerator = enumerator;
+        }
     }
 }
