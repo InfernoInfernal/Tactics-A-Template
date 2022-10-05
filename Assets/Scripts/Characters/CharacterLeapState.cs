@@ -20,7 +20,7 @@ public class CharacterLeapState : CharacterBaseState
 
         //Delay animation movement start
         //Parent to the State Manager, as coroutines can't be started outside Monobehaviour
-        StateManager.StartCoroutine(DelayNextAnimation(StateManager, JumpStage.Leap));
+        StateManager.StartCoroutine(DelayNextAnimation(StateManager, JumpStage.Leap, Constants.Jump));
     }
 
     //Coroutine:
@@ -35,9 +35,11 @@ public class CharacterLeapState : CharacterBaseState
      * Finished, move to next waypoint
     */
 
-    IEnumerator DelayNextAnimation(CharacterStateManager StateManager, JumpStage NextStage)
+    IEnumerator DelayNextAnimation(CharacterStateManager StateManager, JumpStage NextStage, string NextAnimation = null)
     {
         yield return new WaitForSecondsRealtime(Constants.AnimationTravelSpeed * 0.5f);
+        if (NextAnimation != null)
+            CharacterFunctions.ChangeAnimationState(NextAnimation, StateManager.CharacterData);
         StateManager.AnimationJumpStage = NextStage;
     }
 
@@ -65,6 +67,7 @@ public class CharacterLeapState : CharacterBaseState
                 break;
             
             case JumpStage.Finished:
+                StateManager.AnimationJumpStage = JumpStage.DoNothing;
                 StateManager.MoveToNextWaypoint();
                 break;
             
