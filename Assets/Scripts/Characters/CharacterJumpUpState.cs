@@ -11,8 +11,10 @@ public class CharacterJumpUpState : CharacterBaseState
     {
         //Set orientation to direction based on the direction of the new point
         CharacterFunctions.ChangeOrientation(
-            CharacterFunctions.DetermineOrientation(StateManager.MoveOrigin, StateManager.MoveDestination),
-            StateManager.CharacterData);
+            CharacterFunctions.DetermineOrientation(
+                new Vector2Int(StateManager.MoveOrigin.x, StateManager.MoveOrigin.y),
+                new Vector2Int(StateManager.MoveDestination.x, StateManager.MoveDestination.y)),
+                StateManager.CharacterData);
 
         //Resume crouch animation if not playing
         if (StateManager.CharacterData.AnimatorState != Constants.Crouch)

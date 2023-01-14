@@ -31,9 +31,9 @@ public class CharacterStateManager : MonoBehaviour
     [HideInInspector]
     public GameTileTracker GameTileTracker;
     [HideInInspector]
-    public Vector2Int MoveOrigin;
+    public Vector3Int MoveOrigin;
     [HideInInspector]
-    public Vector2Int MoveDestination;
+    public Vector3Int MoveDestination;
     [HideInInspector]
     public Vector3 MoveDestinationPosition;
     [HideInInspector]
@@ -98,7 +98,7 @@ public class CharacterStateManager : MonoBehaviour
         DestinationGameTileObject.GetComponent<GameTile>().OccupyingCharacter = gameObject;
 
         //This will be moved into MoveOrigin when MoveToNextWaypoint runs
-        MoveDestination = new Vector2Int(FirstOrigin.CellPositionX, FirstOrigin.CellPositionY);
+        MoveDestination = new Vector3Int(FirstOrigin.CellPositionX, FirstOrigin.CellPositionY, FirstOrigin.CellPositionZ);
         MoveToNextWaypoint();
     }
 
@@ -117,14 +117,14 @@ public class CharacterStateManager : MonoBehaviour
         GameTile NextDestination = RemainingDestinationWaypoints.First.Value.GetComponent<GameTile>();
 
         MoveOrigin = MoveDestination;
-        MoveDestination = new Vector2Int(NextDestination.CellPositionX, NextDestination.CellPositionY);
+        MoveDestination = new Vector3Int(NextDestination.CellPositionX, NextDestination.CellPositionY, NextDestination.CellPositionZ);
         MoveDestinationPosition = CharacterFunctions.GetCharacterPositionOnGameTile(RemainingDestinationWaypoints.First.Value);
         DestinationZMultiplier = 1 + Math.Abs(gameObject.transform.position.z - MoveDestinationPosition.z);
 
         //Remove first destination once set
         RemainingDestinationWaypoints.RemoveFirst();
 
-        //TODO: Determine move sequence between Walk/JumpUp/Leap
+        //TODO: Determine move sequence between Walk/JumpUp/Leap using Cell Position difference from MoveOrigin and MoveDestination
         ChangeState(Walk);
     }
 
