@@ -132,13 +132,13 @@ public class CharacterStateManager : MonoBehaviour
             //Otherwise use z to determine which animation to use between Leap(JumpDown), JumpUp, and Walk
             switch (MoveDestination.z - MoveOrigin.z)
             {
-                case int z when (z > 1):
+                case > 1:
                     ChangeState(/*JumpUp*/Leap);//TODO: Placeholder, switch to JumpUp logic when that class is finished
                     break;
-                case int z when (z <= 1 && z >= -1):
+                case <= 1 and >= -1:
                     ChangeState(Walk);
                     break;
-                case int z when (z < -1):
+                case < -1:
                     ChangeState(Leap);
                     break;
             }
