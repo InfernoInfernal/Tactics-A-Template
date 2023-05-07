@@ -4047,40 +4047,6 @@ MonoBehaviour:
   CellPositionY: 1
   CellPositionZ: 4
   SurfaceOrientation: 0
---- !u!1 &618368398 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7721201049939247424, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
-  m_PrefabInstance: {fileID: 1203970171}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &618368402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618368398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c29cff538c195c249b69c6f2236de67b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Library: []
-  m_SpriteLibraryAsset: {fileID: 0}
---- !u!114 &618368403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618368398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_CategoryHash: 0
-  m_labelHash: 0
-  m_SpriteKey: 0
 --- !u!1 &649639549
 GameObject:
   m_ObjectHideFlags: 0
