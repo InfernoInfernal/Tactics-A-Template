@@ -30,12 +30,11 @@ public class CharacterGameData : MonoBehaviour
 {
     [Header("Graphic References")]
     //Animation Data
-    public SpriteRenderer FrontSpriteRenderer;
-    public Animator FrontAnimator;
-    public SpriteLibrary FrontSpriteLibrary;
-    public SpriteRenderer BackSpriteRenderer;
-    public Animator BackAnimator;
-    public SpriteLibrary BackSpriteLibrary;
+    public SpriteRenderer CharacterSpriteRenderer;
+    public Animator CharacterAnimator;
+    public SpriteLibrary CharacterSpriteLibrary;
+    public SpriteLibraryAsset FrontSpriteLibraryAsset;
+    public SpriteLibraryAsset BackSpriteLibraryAsset;
 
     [Space(10)]
     [Header("Character Data")]

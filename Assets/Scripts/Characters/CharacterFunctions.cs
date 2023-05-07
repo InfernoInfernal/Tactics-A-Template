@@ -13,8 +13,7 @@ public static class CharacterFunctions
     /// <param name="characterGameData">The game data component of the character game object</param>
     public static void ChangeAnimationState(string newAnimationState, CharacterGameData characterGameData)
     {
-        characterGameData.FrontAnimator.SetTrigger(newAnimationState);
-        characterGameData.BackAnimator.SetTrigger(newAnimationState);
+        characterGameData.CharacterAnimator.SetTrigger(newAnimationState);
     }
 
     /// <summary>
@@ -27,24 +26,20 @@ public static class CharacterFunctions
         switch (newOrientation)
         {
             case CharacterDirectionFacing.FrontLeft:
-                characterGameData.BackSpriteRenderer.enabled = false;
-                characterGameData.FrontSpriteRenderer.flipX = false;
-                characterGameData.FrontSpriteRenderer.enabled = true;
+                characterGameData.CharacterSpriteLibrary.spriteLibraryAsset = characterGameData.FrontSpriteLibraryAsset;
+                characterGameData.CharacterSpriteRenderer.flipX = false;
                 break;
             case CharacterDirectionFacing.FrontRight:
-                characterGameData.BackSpriteRenderer.enabled = false;
-                characterGameData.FrontSpriteRenderer.flipX = true;
-                characterGameData.FrontSpriteRenderer.enabled = true;
+                characterGameData.CharacterSpriteLibrary.spriteLibraryAsset = characterGameData.FrontSpriteLibraryAsset;
+                characterGameData.CharacterSpriteRenderer.flipX = true;
                 break;
             case CharacterDirectionFacing.BackRight:
-                characterGameData.FrontSpriteRenderer.enabled = false;
-                characterGameData.BackSpriteRenderer.flipX = false;
-                characterGameData.BackSpriteRenderer.enabled = true;
+                characterGameData.CharacterSpriteLibrary.spriteLibraryAsset = characterGameData.BackSpriteLibraryAsset;
+                characterGameData.CharacterSpriteRenderer.flipX = false;
                 break;
             case CharacterDirectionFacing.BackLeft:
-                characterGameData.FrontSpriteRenderer.enabled = false;
-                characterGameData.BackSpriteRenderer.flipX = true;
-                characterGameData.BackSpriteRenderer.enabled = true;
+                characterGameData.CharacterSpriteLibrary.spriteLibraryAsset = characterGameData.BackSpriteLibraryAsset;
+                characterGameData.CharacterSpriteRenderer.flipX = true;
                 break;
             default:
                 Debug.LogError($"Invalid Character Orientation");

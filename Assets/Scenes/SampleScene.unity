@@ -6694,10 +6694,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4113330031828085634, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b6092a3416858264fbba2fe92b3105d2, type: 2}
     - target: {fileID: 7194685946661177010, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
       propertyPath: m_FlipX
       value: 0
@@ -6714,10 +6710,6 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7721201049939247439, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -530612847, guid: 9a6ed56356307b34e848d4eb40a11210, type: 3}
     - target: {fileID: 7721201049939247439, guid: cd2abf24a30113a4c8f9532a2ab24b8a, type: 3}
       propertyPath: m_Enabled
       value: 1
