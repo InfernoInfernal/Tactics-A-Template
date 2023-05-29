@@ -3,15 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum JumpStage
-{
-    DoNothing,
-    Leap,
-    JumpUp,
-    FallDown,
-    Finished
-}
-
 /// <summary>
 /// Manager Class of the State Machine for Characters
 /// Attached to a Character Game Object with the CharacterGameData Component
@@ -24,7 +15,6 @@ public class CharacterStateManager : MonoBehaviour
     CharacterBaseState CharacterState;
     public CharacterIdleState Idle = new CharacterIdleState();
     public CharacterWalkState Walk = new CharacterWalkState();
-    public CharacterJumpUpState JumpUp = new CharacterJumpUpState();
     public CharacterLeapState Leap = new CharacterLeapState();
 
     //Used for movement reference in states
@@ -39,9 +29,6 @@ public class CharacterStateManager : MonoBehaviour
     [HideInInspector]
     public float DestinationZMultiplier;
     public LinkedList<GameObject> RemainingDestinationWaypoints = new LinkedList<GameObject>();
-
-    [HideInInspector]
-    public JumpStage AnimationJumpStage = JumpStage.DoNothing;
 
     void Start()
     {
@@ -126,32 +113,24 @@ public class CharacterStateManager : MonoBehaviour
 
         //If the x or y difference is greater than 1 tile, then we can only be leaping
         if (Math.Abs(MoveDestination.x - MoveOrigin.x) > 1 || Math.Abs(MoveDestination.y - MoveOrigin.y) > 1)
+        {
             ChangeState(Leap);
+        }
         else
         {
             //Otherwise use z to determine which animation to use between Leap(JumpDown), JumpUp, and Walk
             switch (MoveDestination.z - MoveOrigin.z)
             {
-                case > 1:
+                case > 1: //Jump Up
                     ChangeState(/*JumpUp*/Leap);//TODO: Placeholder, switch to JumpUp logic when that class is finished
                     break;
-                case <= 1 and >= -1:
+                case <= 1 and >= -1: //Walk
                     ChangeState(Walk);
                     break;
-                case < -1:
+                case < -1: //Leap (Jump Down)
                     ChangeState(Leap);
                     break;
             }
-        }
-    }
-
-    internal class StartCoroutine
-    {
-        private IEnumerator enumerator;
-
-        public StartCoroutine(IEnumerator enumerator)
-        {
-            this.enumerator = enumerator;
         }
     }
 }
