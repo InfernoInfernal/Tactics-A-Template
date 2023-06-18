@@ -35,6 +35,7 @@ public class CharacterGameData : MonoBehaviour
     public SpriteLibrary CharacterSpriteLibrary;
     public SpriteLibraryAsset FrontSpriteLibraryAsset;
     public SpriteLibraryAsset BackSpriteLibraryAsset;
+    public AnimationCurve LeapingCurve;
 
     [Space(10)]
     [Header("Character Data")]

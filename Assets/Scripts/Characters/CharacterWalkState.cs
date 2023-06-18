@@ -16,7 +16,10 @@ public class CharacterWalkState : CharacterBaseState
 
         //Resume move animation if not playing
         if (StateManager.CharacterData.AnimatorState != Constants.Idle)
+        {
             CharacterFunctions.ChangeAnimationState(Constants.Idle, StateManager.CharacterData);
+            StateManager.CharacterData.AnimatorState = Constants.Idle;
+        }
     }
 
     public override void Update(CharacterStateManager StateManager)

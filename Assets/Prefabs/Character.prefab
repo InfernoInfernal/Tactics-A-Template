@@ -52,13 +52,46 @@ MonoBehaviour:
   CharacterSpriteLibrary: {fileID: 7723695738988490285}
   FrontSpriteLibraryAsset: {fileID: 7108339969198208228, guid: 3d91022b686afe449abc3d45c9e0cb44, type: 3}
   BackSpriteLibraryAsset: {fileID: 7108339969198208228, guid: 41e0c61f8ed94914db389db06bb729e1, type: 3}
+  LeapingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2.8572106
+      outSlope: 2.8572106
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.19253965
+    - serializedVersion: 3
+      time: 0.5
+      value: 0.5
+      inSlope: 0.00035164927
+      outSlope: 0.00035164927
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.5646901
+      outWeight: 0.8012966
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2.869306
+      outSlope: -2.869306
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.1608448
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   Team: 0
   DirectionFaced: 0
   AnimatorState: Idle
-  CharacterActive: 0
-  Movement: 0
-  VerticalJump: 0
-  HorizontalLeap: 0
+  CharacterActive: 1
+  Movement: 5
+  VerticalJump: 1
+  HorizontalLeap: 1
 --- !u!114 &7723695738988490281
 MonoBehaviour:
   m_ObjectHideFlags: 0

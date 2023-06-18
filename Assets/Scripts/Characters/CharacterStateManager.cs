@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -106,23 +104,23 @@ public class CharacterStateManager : MonoBehaviour
         MoveOrigin = MoveDestination;
         MoveDestination = new Vector3Int(NextDestination.CellPositionX, NextDestination.CellPositionY, NextDestination.CellPositionZ);
         MoveDestinationPosition = CharacterFunctions.GetCharacterPositionOnGameTile(RemainingDestinationWaypoints.First.Value);
-        DestinationZMultiplier = 1 + Math.Abs(gameObject.transform.position.z - MoveDestinationPosition.z);
+        DestinationZMultiplier = 1 + Mathf.Abs(gameObject.transform.position.z - MoveDestinationPosition.z);
 
         //Remove first destination once set
         RemainingDestinationWaypoints.RemoveFirst();
 
         //If the x or y difference is greater than 1 tile, then we can only be leaping
-        if (Math.Abs(MoveDestination.x - MoveOrigin.x) > 1 || Math.Abs(MoveDestination.y - MoveOrigin.y) > 1)
+        if (Mathf.Abs(MoveDestination.x - MoveOrigin.x) > 1 || Mathf.Abs(MoveDestination.y - MoveOrigin.y) > 1)
         {
             ChangeState(Leap);
         }
         else
         {
-            //Otherwise use z to determine which animation to use between Leap(JumpDown), JumpUp, and Walk
+            //Otherwise use z to determine which animation to use between Leap and Walk
             switch (MoveDestination.z - MoveOrigin.z)
             {
                 case > 1: //Jump Up
-                    ChangeState(/*JumpUp*/Leap);//TODO: Placeholder, switch to JumpUp logic when that class is finished
+                    ChangeState(Leap);
                     break;
                 case <= 1 and >= -1: //Walk
                     ChangeState(Walk);
